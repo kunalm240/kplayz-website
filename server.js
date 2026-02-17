@@ -180,6 +180,29 @@ app.get('/api/youtube/playlist/:id', async (req, res) => {
   res.json({ videos, count: videos.length });
 });
 
+// GET ALL PLAYLISTS
+app.get('/api/youtube/playlists', async (req, res) => {
+  try {
+    const response = await youtube.playlists.list({
+      part: 'snippet,contentDetails',
+      channelId: CHANNEL_ID,
+      maxResults: 10
+    });
+
+    const playlists = response.data.items.map(pl => ({
+      id: pl.id,
+      title: pl.snippet.title,
+      thumbnail: pl.snippet.thumbnails.medium.url,
+      count: pl.contentDetails.itemCount
+    }));
+
+    res.json(playlists);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch playlists' });
+  }
+});
+
 // Contact form
 app.post('/api/contact', rateLimit, async (req, res) => {
   try {
