@@ -66,30 +66,46 @@ async function loadLatestVideo() {
 }
 
 // ================= PLAYLIST CARDS =================
-function renderPlaylists() {
+async function renderPlaylists() {
   const grid = document.getElementById('seriesGrid');
   if (!grid) return;
 
-  if (!playlists.length) {
-    grid.innerHTML = '<p class="loading-text">No series available yet.</p>';
-    return;
+  grid.innerHTML = '<p class="loading-text">Loading series...</p>';
+
+  try {
+    const playlistData = await Promise.all(
+      playlists.map(async (playlist) => {
+        const res = await fetch(`${API_BASE}/api/youtube/playlist/${playlist.id}`);
+        const data = await res.json();
+
+        return {
+          ...playlist,
+          count: data.count || 0,
+          latest: data.videos?.[0]?.title || 'Latest episode'
+        };
+      })
+    );
+
+    grid.innerHTML = playlistData.map(p => `
+      <div class="series-card ps-hover">
+        <a href="https://www.youtube.com/playlist?list=${p.id}" target="_blank">
+          <div class="series-thumbnail">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          </div>
+          <div class="series-info">
+            <h3>${p.name}</h3>
+            <p class="series-meta">${p.count} Episodes</p>
+            <p class="series-latest">🆕 ${p.latest}</p>
+          </div>
+        </a>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error('Playlist load error:', err);
+    grid.innerHTML = '<p class="loading-text">Failed to load series.</p>';
   }
-
-  grid.innerHTML = playlists.map(playlist => `
-    <div class="series-card">
-      <a href="https://www.youtube.com/playlist?list=${playlist.id}" target="_blank">
-        <div class="series-thumbnail">
-          <img src="${playlist.image}" alt="${playlist.name}" loading="lazy" />
-        </div>
-        <div class="series-info">
-          <h3>${playlist.name}</h3>
-          <p class="series-meta">Cinematic walkthrough</p>
-        </div>
-      </a>
-    </div>
-  `).join('');
 }
-
 // ================= HERO BUTTON =================
 function watchLatest() {
   window.open('https://youtube.com/@kplayz_official/videos', '_blank');
