@@ -184,6 +184,27 @@ opacity:1;transform:translateY(0)
   margin-bottom: 2rem;
 }
 
+.featured-info {
+  max-width: 520px;
+}
+
+.featured-info h3 {
+  font-size: 1.6rem;
+  line-height: 1.35;
+  margin-bottom: 1rem;
+}
+
+.featured-info p {
+  color: #aaa;
+  margin-bottom: 1rem;
+}
+
+#videoDate {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 1.2rem;
+}
+
 .media-card {
   background: rgba(255,255,255,0.03);
   padding: 2rem;
