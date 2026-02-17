@@ -58,9 +58,29 @@ cursor:pointer;text-decoration:none;transition:.3s
 
 /* ================= SOCIAL ================= */
 .hero-social{display:flex;gap:1.2rem;justify-content:center}
-.social-icon{
-width:44px;height:44px;border:1px solid #333;border-radius:50%;
-display:flex;align-items:center;justify-content:center;color:#fff;transition:.3s
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;              /* 👈 THIS MAKES SVG WHITE */
+  background: rgba(255,255,255,0.02);
+  transition: all 0.3s ease;
+}
+
+.social-icon svg {
+  fill: #ffffff;               /* 👈 FORCE ICON COLOR */
+  width: 18px;
+  height: 18px;
+}
+
+.social-icon:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 12px rgba(255,255,255,0.25);
+  transform: translateY(-3px);
 }
 .social-icon:hover{border-color:#fff;transform:translateY(-3px)}
 
