@@ -1,209 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="KPLAYZ - Cinematic PS5 gameplay. No commentary. Just the Game." />
-  <title>KPLAYZ - Premium Gaming Creator</title>
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="/css/styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPLAYZ – Premium Gaming</title>
+<link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="navbar-container">
-
-      <!-- Logo -->
-      <div class="navbar-logo">
-        <img src="/images/logo.png" alt="KPLAYZ logo" class="logo-icon" />
-        <span class="logo-text">KPLAYZ</span>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <div class="logo-icon">
+        <img src="/assets/logo.png" alt="KPLAYZ logo">
       </div>
-
-      <!-- Nav links -->
-      <ul class="nav-menu">
-        <li><a href="#hero" class="nav-link">Home</a></li>
-        <li><a href="#featured" class="nav-link">Featured</a></li>
-        <li><a href="#stats" class="nav-link">Stats</a></li>
-        <li><a href="#series" class="nav-link">Series</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-
+      <span class="logo-text">KPLAYZ</span>
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <div class="hero-content">
+    <ul class="nav-menu">
+      <li><a href="#hero" class="nav-link">Home</a></li>
+      <li><a href="#featured" class="nav-link">Featured</a></li>
+      <li><a href="#stats" class="nav-link">Stats</a></li>
+      <li><a href="#series" class="nav-link">Series</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-      <!-- Big logo -->
-      <img src="/images/logo.png" alt="KPLAYZ logo" class="hero-logo" />
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-content">
+    <img src="/assets/logo.png" class="hero-logo" alt="KPLAYZ logo">
+    <h1 class="hero-title">KPLAYZ</h1>
+    <p class="hero-tagline">Just the Game</p>
 
-      <h1 class="hero-title">KPLAYZ</h1>
-      <p class="hero-tagline">Just the Game</p>
+    <div class="hero-buttons">
+      <a href="#featured" class="btn btn-primary">Watch Latest</a>
 
-      <div class="hero-buttons">
-        <button class="btn btn-primary" onclick="watchLatest()">Watch Latest</button>
-        <a href="https://youtube.com/@kplayz_official" target="_blank" class="btn btn-secondary">Subscribe</a>
-      </div>
-
-      <div class="hero-social">
-        <a href="https://youtube.com/@kplayz_official" target="_blank" class="social-icon">YT</a>
-        <a href="https://instagram.com/kplayz_official" target="_blank" class="social-icon">IG</a>
-        <a href="https://x.com/kplayz_official" target="_blank" class="social-icon">X</a>
-      </div>
-
+      <a href="https://www.youtube.com/channel/UCQ0c2i4bBA0NU8Ikpr2fX3g?sub_confirmation=1"
+         target="_blank"
+         class="btn btn-secondary">
+        Subscribe
+      </a>
     </div>
-  </section>
 
-  <!-- FEATURED VIDEO -->
-  <section id="featured" class="featured">
-    <div class="container">
-
-      <h2 class="section-title">Latest Video</h2>
-
-      <div class="featured-grid">
-
-        <!-- Video container (dynamic) -->
-        <div class="featured-video" id="videoContainer" style="display:none;">
-          <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <!-- Placeholder while loading -->
-        <div id="videoPlaceholder" class="video-placeholder">
-          Loading latest video...
-        </div>
-
-        <!-- Video info -->
-        <div class="featured-info">
-          <h3 id="videoTitle">Latest Upload</h3>
-          <p id="videoDescription">Cinematic gameplay from PlayStation 5</p>
-          <p id="videoDate" class="video-date"></p>
-
-          <a href="https://youtube.com/@kplayz_official/videos" target="_blank" class="btn btn-primary">
-            Watch on YouTube
-          </a>
-        </div>
-
-      </div>
+    <div class="hero-social">
+      <a href="https://youtube.com/@kplayz_official" target="_blank" class="social-icon">YT</a>
+      <a href="https://instagram.com/kplayz_official" target="_blank" class="social-icon">IG</a>
+      <a href="https://x.com/kplayz_official" target="_blank" class="social-icon">X</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- STATS -->
-  <section id="stats" class="stats-section">
-    <div class="container">
+<!-- FEATURED -->
+<section id="featured" class="featured">
+  <div class="container">
+    <h2 class="section-title">Latest Video</h2>
 
-      <h2 class="section-title">Channel Stats</h2>
+    <div class="featured-grid">
 
-      <div class="stats-grid">
-
-        <div class="stat-card">
-          <div class="stat-value" id="statSubscribers">0</div>
-          <div class="stat-label">Subscribers</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-value" id="statViews">0</div>
-          <div class="stat-label">Total Views</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-value" id="statVideos">0</div>
-          <div class="stat-label">Videos</div>
-        </div>
-
+      <div id="videoContainer" class="featured-video" style="display:none;">
+        <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
       </div>
-    </div>
-  </section>
 
-  <!-- SERIES / PLAYLISTS -->
-  <section id="series" class="series-section">
-    <div class="container">
+      <div id="videoPlaceholder" class="video-placeholder">
+        Loading video...
+      </div>
 
-      <h2 class="section-title">Series</h2>
-
-      <div class="series-grid" id="seriesGrid">
-        <p class="loading-text">Loading series...</p>
+      <div class="featured-info">
+        <h3 id="videoTitle">Loading...</h3>
+        <p id="videoDescription">Please wait</p>
+        <p id="videoDate"></p>
+        <a href="https://youtube.com/@kplayz_official/videos" target="_blank" class="btn btn-primary">
+          Watch on YouTube
+        </a>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about" class="about-section">
-    <div class="container">
+<!-- STATS -->
+<section id="stats" class="stats-section">
+  <div class="container">
+    <h2 class="section-title">Channel Stats</h2>
 
-      <h2 class="section-title">About KPLAYZ</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="statSubscribers">0</div>
+        <div class="stat-label">Subscribers</div>
+      </div>
 
-      <div class="about-content">
+      <div class="stat-card">
+        <div class="stat-value" id="statViews">0</div>
+        <div class="stat-label">Total Views</div>
+      </div>
 
-        <p>
-          KPLAYZ is a no-commentary gaming channel focused on cinematic,
-          story-driven gameplay. Every video is designed to deliver a pure,
-          uninterrupted experience — just the game.
-        </p>
-
-        <p>
-          The content emphasizes immersive PS5 visuals, clean UI-free presentation,
-          and movie-like pacing. Each series is structured so viewers can experience
-          full game stories seamlessly.
-        </p>
-
-        <p>
-          The goal is to build a premium library of cinematic walkthroughs that
-          feels like watching a film, not a typical gameplay video.
-        </p>
-
+      <div class="stat-card">
+        <div class="stat-value" id="statVideos">0</div>
+        <div class="stat-label">Videos</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact-section">
-    <div class="container">
+<!-- SERIES -->
+<section id="series" class="series-section">
+  <div class="container">
+    <h2 class="section-title">Latest Videos</h2>
+    <div class="series-grid" id="seriesGrid"></div>
+  </div>
+</section>
 
-      <h2 class="section-title">Get in Touch</h2>
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2 class="section-title">Get in Touch</h2>
 
-      <form class="contact-form" id="contactForm">
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+      <textarea id="message" rows="5" placeholder="Message" required></textarea>
 
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" id="name" required />
-        </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div id="formMessage"></div>
+    </form>
+  </div>
+</section>
 
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="email" required />
-        </div>
+<footer class="footer">
+  © 2026 KPLAYZ
+</footer>
 
-        <div class="form-group">
-          <label>Subject</label>
-          <input type="text" id="subject" required />
-        </div>
-
-        <div class="form-group">
-          <label>Message</label>
-          <textarea id="message" rows="5" required></textarea>
-        </div>
-
-        <div id="formMessage" class="form-message" style="display:none;"></div>
-
-        <button type="submit" class="btn btn-primary">Send Message</button>
-
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 KPLAYZ. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- External JS -->
-  <script src="/js/app.js"></script>
-
+<script src="/js/app.js"></script>
 </body>
 </html>
