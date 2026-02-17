@@ -69,7 +69,8 @@ async function loadLatestVideo(){
   placeholder.style.display='none';
 
   document.getElementById('videoTitle').textContent=video.title;
-  document.getElementById('videoDescription').textContent=video.description.slice(0,120);
+  document.getElementById('videoDescription').textContent =
+  video.description.substring(0, 140) + '…';
   document.getElementById('videoDate').textContent=new Date(video.publishedAt).toLocaleDateString();
 }
 
