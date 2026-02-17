@@ -3,18 +3,315 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="KPLAYZ - Premium Gaming Creator. Cinematic PS5 gameplay, no commentary. GTA, Cyberpunk, and more.">
-  <meta name="keywords" content="gaming, PS5, gameplay, creator, cinematic, no commentary">
+  <meta name="description" content="KPLAYZ - Premium Gaming Creator. Cinematic PS5 gameplay, no commentary.">
+  <meta name="keywords" content="gaming, PS5, gameplay, creator, cinematic">
   <meta name="author" content="KPLAYZ">
-  <meta property="og:title" content="KPLAYZ - Gaming Creator">
-  <meta property="og:description" content="Cinematic PlayStation 5 gameplay experiences">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="KPLAYZ - Gaming Creator">
   <title>KPLAYZ - Premium Gaming Creator</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+      background-color: #000000; 
+      color: #ffffff; 
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    @keyframes drift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 6rem 0; position: relative; }
+    h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+    h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
+    h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    h3 { font-size: 1.4rem; }
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .navbar-logo:hover { transform: scale(1.05); }
+    .logo-icon { width: 32px; height: 32px; color: #ffffff; }
+    .logo-text { font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; }
+    .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
+    .nav-link { color: #ffffff; text-decoration: none; font-weight: 400; transition: color 0.3s ease; }
+    .nav-link:hover { color: #808080; }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding-top: 80px;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      overflow: hidden;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+    }
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      color: #ffffff;
+      animation: float 3s ease-in-out infinite;
+      margin: 0 auto 2rem;
+    }
+    .hero-title {
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      font-size: 3.5rem;
+    }
+    .hero-tagline {
+      font-size: 1.5rem;
+      color: #808080;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .hero-social {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: 1px solid #808080;
+      border-radius: 4px;
+      background: transparent;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+    }
+    .btn:hover {
+      border-color: #ffffff;
+      box-shadow: 0 8px 24px rgba(128, 128, 128, 0.2);
+      transform: translateY(-2px);
+    }
+    .btn-primary { border-color: #ffffff; }
+    .btn-secondary { border-color: #333333; }
+    
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #333333;
+      border-radius: 50%;
+      color: #ffffff;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      border-color: #808080;
+      box-shadow: 0 8px 16px rgba(128, 128, 128, 0.15);
+      transform: translateY(-2px);
+    }
+    
+    .featured { background: #1a1a1a; }
+    .stats-section { background: #000000; }
+    .series-section { background: #1a1a1a; }
+    .contact-section { background: #000000; }
+    
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .featured-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #333333;
+    }
+    .featured-video iframe {
+      width: 100%;
+      height: 100%;
+    }
+    .featured-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .featured-title { font-size: 1.8rem; }
+    .featured-description { color: #808080; }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+    .stat-card {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #333333;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      border-color: #808080;
+      transform: translateY(-4px);
+    }
+    .stat-value {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: #808080;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .series-card {
+      background: #000000;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #333333;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .series-card:hover {
+      border-color: #808080;
+      transform: translateY(-8px);
+    }
+    .series-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
+      overflow: hidden;
+    }
+    .series-info { padding: 1.5rem; }
+    
+    .contact-form { max-width: 600px; margin: 0 auto; }
+    .form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; }
+    .form-group label { margin-bottom: 0.5rem; font-weight: 500; }
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem 1rem;
+      background: #1a1a1a;
+      border: 1px solid #333333;
+      border-radius: 4px;
+      color: #ffffff;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #808080;
+      background: #333333;
+    }
+    .form-message {
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+    .form-message.success {
+      background: rgba(128, 128, 128, 0.1);
+      border: 1px solid #808080;
+    }
+    .form-message.error {
+      background: rgba(128, 0, 0, 0.1);
+      border: 1px solid #808080;
+    }
+    
+    .footer {
+      background: #1a1a1a;
+      border-top: 1px solid #333333;
+      padding: 2rem 0;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      color: #808080;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: #ffffff; }
+    .footer p { color: #808080; }
+    
+    @media (max-width: 768px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .btn { width: 100%; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+    
+    @media (max-width: 480px) {
+      html { font-size: 14px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .series-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-container">
       <div class="navbar-logo">
@@ -26,140 +323,126 @@
         </svg>
         <span class="logo-text">KPLAYZ</span>
       </div>
-      <div class="navbar-toggle" id="navToggle">
-        <span></span><span></span><span></span>
-      </div>
-      <ul class="nav-menu" id="navMenu">
+      <ul class="nav-menu">
         <li><a href="#hero" class="nav-link">Home</a></li>
         <li><a href="#featured" class="nav-link">Featured</a></li>
-        <li><a href="#series" class="nav-link">Series</a></li>
         <li><a href="#stats" class="nav-link">Stats</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#series" class="nav-link">Series</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
 
+  <!-- HERO -->
   <section id="hero" class="hero">
     <div class="hero-content">
-      <div class="hero-logo-container">
-        <svg class="hero-logo" viewBox="0 0 200 200" width="120" height="120">
-          <circle cx="60" cy="80" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
-          <circle cx="140" cy="80" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
-          <path d="M 40 100 Q 100 140 160 100" fill="none" stroke="currentColor" stroke-width="3"/>
-          <rect x="20" y="60" width="160" height="100" rx="30" fill="none" stroke="currentColor" stroke-width="3"/>
-        </svg>
-      </div>
+      <svg class="hero-logo" viewBox="0 0 200 200" width="120" height="120">
+        <circle cx="60" cy="80" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="140" cy="80" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+        <path d="M 40 100 Q 100 140 160 100" fill="none" stroke="currentColor" stroke-width="3"/>
+        <rect x="20" y="60" width="160" height="100" rx="30" fill="none" stroke="currentColor" stroke-width="3"/>
+      </svg>
       <h1 class="hero-title">KPLAYZ</h1>
       <p class="hero-tagline">Just the Game</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" id="watchLatestBtn"><span>Watch Latest</span></button>
+        <button class="btn btn-primary" onclick="watchLatest()"><span>Watch Latest</span></button>
         <a href="https://youtube.com/@kplayz_official" target="_blank" class="btn btn-secondary"><span>Subscribe</span></a>
       </div>
       <div class="hero-social">
-        <a href="https://youtube.com/@kplayz_official" target="_blank" class="social-icon" aria-label="YouTube"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="currentColor"/></svg></a>
-        <a href="https://instagram.com/kplayz_official" target="_blank" class="social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
-        <a href="https://x.com/kplayz_official" target="_blank" class="social-icon" aria-label="Twitter"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></a>
+        <a href="https://youtube.com/@kplayz_official" target="_blank" class="social-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="currentColor"/></svg>
+        </a>
+        <a href="https://instagram.com/kplayz_official" target="_blank" class="social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        <a href="https://x.com/kplayz_official" target="_blank" class="social-icon" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
-    <div class="hero-background"><div class="ps-symbols">△ ○ ✕ □</div></div>
   </section>
 
+  <!-- FEATURED VIDEO -->
   <section id="featured" class="featured">
     <div class="container">
-      <h2 class="section-title">Latest Video</h2>
+      <h2 style="text-align: center; margin-bottom: 3rem;">Latest Video</h2>
       <div class="featured-grid">
         <div class="featured-video">
-          <div class="video-placeholder" id="videoPlaceholder"><div class="skeleton-loader"></div></div>
-          <div id="videoContainer" style="display: none;"><iframe id="ytPlayer" width="100%" height="100%" src="" frameborder="0" allowfullscreen></iframe></div>
+          <iframe id="ytPlayer" src="https://www.youtube.com/embed/?list=PL&v=" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="featured-info">
-          <h3 id="videoTitle">Loading latest video...</h3>
-          <p id="videoDescription">Fetching from YouTube...</p>
-          <div class="featured-meta">
-            <span id="videoDate" class="meta-item">📅 Just now</span>
+          <h3 id="videoTitle">KPLAYZ Latest Upload</h3>
+          <p id="videoDescription">Cinematic gameplay from PlayStation 5</p>
+          <div style="font-size: 0.9rem; color: #808080;">
+            <p id="videoDate">📅 Latest upload</p>
           </div>
-          <a href="#" id="videoLink" target="_blank" class="btn btn-primary"><span>Watch on YouTube</span></a>
+          <a href="https://youtube.com/@kplayz_official/videos" target="_blank" class="btn btn-primary">
+            <span>Watch on YouTube</span>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- STATS -->
   <section id="stats" class="stats-section">
     <div class="container">
-      <h2 class="section-title">Channel Stats</h2>
+      <h2 style="text-align: center; margin-bottom: 3rem;">Channel Stats</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-value" id="statSubscribers"><div class="skeleton-loader"></div></div>
+          <div class="stat-value" id="statSubscribers">0</div>
           <div class="stat-label">Subscribers</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="statViews"><div class="skeleton-loader"></div></div>
+          <div class="stat-value" id="statViews">0</div>
           <div class="stat-label">Total Views</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="statVideos"><div class="skeleton-loader"></div></div>
+          <div class="stat-value" id="statVideos">0</div>
           <div class="stat-label">Videos</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- SERIES -->
   <section id="series" class="series-section">
     <div class="container">
-      <h2 class="section-title">Series</h2>
+      <h2 style="text-align: center; margin-bottom: 3rem;">Latest Videos</h2>
       <div class="series-grid" id="seriesGrid">
-        <div class="series-card"><div class="series-thumbnail"><div class="skeleton-loader"></div></div></div>
-        <div class="series-card"><div class="series-thumbnail"><div class="skeleton-loader"></div></div></div>
-        <div class="series-card"><div class="series-thumbnail"><div class="skeleton-loader"></div></div></div>
+        <p style="text-align: center; color: #808080; grid-column: 1/-1;">Loading videos...</p>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about-section">
-    <div class="container">
-      <h2 class="section-title">About</h2>
-      <div class="about-grid">
-        <div class="about-content">
-          <p class="about-text">Welcome to KPLAYZ. We create immersive, cinematic gameplay experiences showcasing stunning visuals on PlayStation 5. No commentary. Just pure gaming.</p>
-          <p class="about-text">From GTA to Cyberpunk, each video highlights the artistry and technical excellence of modern game design.</p>
-          <div class="about-features">
-            <div class="feature"><span class="feature-icon">△</span><span>Cinematic Quality</span></div>
-            <div class="feature"><span class="feature-icon">○</span><span>No Commentary</span></div>
-            <div class="feature"><span class="feature-icon">✕</span><span>PlayStation Focused</span></div>
-            <div class="feature"><span class="feature-icon">□</span><span>Immersive Audio</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <div class="container">
-      <h2 class="section-title">Get in Touch</h2>
+      <h2 style="text-align: center; margin-bottom: 3rem;">Get in Touch</h2>
       <form class="contact-form" id="contactForm">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" required placeholder="Your name" maxlength="100">
+          <input type="text" id="name" required placeholder="Your name" maxlength="100">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required placeholder="your@email.com" maxlength="100">
+          <input type="email" id="email" required placeholder="your@email.com" maxlength="100">
         </div>
         <div class="form-group">
           <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" required placeholder="Message subject" maxlength="200">
+          <input type="text" id="subject" required placeholder="Subject" maxlength="200">
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required placeholder="Your message..." rows="6" maxlength="5000"></textarea>
+          <textarea id="message" required placeholder="Your message..." rows="6" maxlength="5000"></textarea>
         </div>
         <div id="formMessage" class="form-message" style="display: none;"></div>
-        <button type="submit" class="btn btn-primary" id="submitBtn"><span>Send Message</span></button>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
       </form>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
@@ -173,6 +456,95 @@
     </div>
   </footer>
 
-  <script src="/js/app.js" defer></script>
+  <!-- JAVASCRIPT -->
+  <script>
+    const API_BASE = window.location.origin;
+
+    function formatNumber(num) {
+      if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+      if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+      return num.toString();
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch(`${API_BASE}/api/youtube/stats`);
+        const data = await res.json();
+        document.getElementById('statSubscribers').textContent = formatNumber(data.subscribers || 0);
+        document.getElementById('statViews').textContent = formatNumber(data.totalViews || 0);
+        document.getElementById('statVideos').textContent = data.totalVideos || 0;
+      } catch (error) {
+        console.error('Error loading stats:', error);
+      }
+    }
+
+    async function loadLatestVideos() {
+      try {
+        const res = await fetch(`${API_BASE}/api/youtube/latest`);
+        const videos = await res.json();
+        
+        const grid = document.getElementById('seriesGrid');
+        if (!videos || videos.length === 0) {
+          grid.innerHTML = '<p style="text-align: center; color: #808080; grid-column: 1/-1;">No videos yet. Check back soon!</p>';
+          return;
+        }
+
+        grid.innerHTML = videos.map(video => `
+          <div class="series-card">
+            <a href="https://youtube.com/watch?v=${video.id}" target="_blank" style="text-decoration: none; color: inherit;">
+              <div class="series-thumbnail" style="background-image: url('${video.thumbnail}'); background-size: cover; background-position: center;"></div>
+              <div class="series-info">
+                <h3>${video.title}</h3>
+                <p style="color: #808080; font-size: 0.9em;">${video.publishedAt}</p>
+              </div>
+            </a>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading videos:', error);
+        document.getElementById('seriesGrid').innerHTML = '<p style="text-align: center; color: #808080; grid-column: 1/-1;">Error loading videos. Try again later.</p>';
+      }
+    }
+
+    function watchLatest() {
+      window.open('https://youtube.com/@kplayz_official/videos', '_blank');
+    }
+
+    document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch(`${API_BASE}/api/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+          })
+        });
+        const result = await res.json();
+        const msg = document.getElementById('formMessage');
+        msg.style.display = 'block';
+        if (res.ok) {
+          msg.className = 'form-message success';
+          msg.textContent = 'Message sent! Thank you!';
+          e.target.reset();
+        } else {
+          msg.className = 'form-message error';
+          msg.textContent = result.error || 'Failed to send';
+        }
+      } catch (error) {
+        console.error('Form error:', error);
+      }
+    });
+
+    window.addEventListener('load', () => {
+      loadStats();
+      loadLatestVideos();
+    });
+    setInterval(loadStats, 5 * 60 * 1000);
+    setInterval(loadLatestVideos, 5 * 60 * 1000);
+  </script>
 </body>
 </html>
