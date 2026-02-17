@@ -128,8 +128,32 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem
 .series-card{
 border:1px solid #111;border-radius:10px;overflow:hidden;transition:.35s
 }
-.series-card:hover{transform:translateY(-8px);border-color:#fff}
-.series-thumbnail img{width:100%;height:160px;object-fit:cover}
+.series-card {
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.series-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-4px);
+}
+.series-thumbnail {
+  width: 100%;
+  height: 200px;          /* cinematic banner height */
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+}
+
+.series-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills properly without weird crop */
+  object-position: center;
+  display: block;
+}
 .series-info{padding:1rem}
 
 /* ================= CONTACT ================= */
