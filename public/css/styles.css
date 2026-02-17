@@ -133,6 +133,7 @@ section { padding: 6rem 0; position: relative; }
 
 /* ================= PLAYSTATION SYMBOL BACKGROUND ================= */
 
+
 .hero::before {
   content: '';
   position: absolute;
