@@ -123,3 +123,10 @@ section { padding: 6rem 0; position: relative; }
   .series-grid { grid-template-columns: 1fr; }
   .about-features { grid-template-columns: 1fr; }
 }
+
+.series-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
