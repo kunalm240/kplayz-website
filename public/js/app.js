@@ -117,7 +117,21 @@ async function loadPlaylists() {
     }
 
     container.innerHTML = playlists.map(pl => {
-      const game = detectGame(pl.title);
+      container.innerHTML = playlists.map(pl => `
+  <div class="series-card"
+       onclick="window.open('https://youtube.com/playlist?list=${pl.id}','_blank')">
+
+    <div class="series-thumbnail">
+      <img src="${pl.thumbnail}" alt="${pl.title}">
+    </div>
+
+    <div class="series-info">
+      <h3>${pl.title}</h3>
+      <p>${pl.count} videos</p>
+    </div>
+
+  </div>
+`).join('');
 
       return `
         <div class="series-card"
@@ -143,4 +157,5 @@ window.addEventListener('load',()=>{
   loadStats();
   loadLatestVideo();
   loadPlaylistVideos();
+  loadPlaylists();
 });
