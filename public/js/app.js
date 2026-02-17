@@ -104,6 +104,40 @@ async function loadPlaylistVideos() {
   }
 }
 
+async function loadPlaylists() {
+  try {
+    const res = await fetch('/api/youtube/playlists');
+    const playlists = await res.json();
+
+    const container = document.getElementById('playlistGrid');
+
+    if (!playlists || playlists.length === 0) {
+      container.innerHTML = '<p>No playlists yet.</p>';
+      return;
+    }
+
+    container.innerHTML = playlists.map(pl => {
+      const game = detectGame(pl.title);
+
+      return `
+        <div class="series-card"
+             onclick="window.open('https://youtube.com/playlist?list=${pl.id}','_blank')">
+          <div class="series-thumbnail">
+            <img src="${pl.thumbnail}" alt="${pl.title}">
+          </div>
+          <div class="series-info">
+            <h3>${game}</h3>
+            <p>${pl.count} videos</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 /* ================= INIT ================= */
 window.addEventListener('load',()=>{
   loadStats();
