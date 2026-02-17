@@ -73,6 +73,37 @@ async function loadLatestVideo(){
   document.getElementById('videoDate').textContent=new Date(video.publishedAt).toLocaleDateString();
 }
 
+async function loadPlaylistVideos() {
+  try {
+    const res = await fetch('/api/youtube/playlist');
+    const videos = await res.json();
+
+    const grid = document.getElementById('seriesGrid');
+
+    if (!videos || videos.length === 0) {
+      grid.innerHTML = '<p>No videos yet.</p>';
+      return;
+    }
+
+    grid.innerHTML = videos.map(video => `
+      <div class="series-card">
+        <a href="https://youtube.com/watch?v=${video.videoId}" target="_blank">
+          <div class="series-thumbnail">
+            <img src="${video.thumbnail}" alt="${video.title}">
+          </div>
+          <div class="series-info">
+            <h3>${video.title}</h3>
+            <p>${new Date(video.publishedAt).toLocaleDateString()}</p>
+          </div>
+        </a>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 /* ================= INIT ================= */
 window.addEventListener('load',()=>{
   loadStats();
