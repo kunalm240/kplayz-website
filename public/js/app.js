@@ -108,4 +108,5 @@ async function loadPlaylistVideos() {
 window.addEventListener('load',()=>{
   loadStats();
   loadLatestVideo();
+  loadPlaylistVideos();
 });
