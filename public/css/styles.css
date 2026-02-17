@@ -149,3 +149,23 @@ opacity:1;transform:translateY(0)
 .activity-strip p {
   margin: 0.3rem 0;
 }
+
+.media-kit {
+  background: #0a0a0a;
+  text-align: center;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.media-card {
+  background: rgba(255,255,255,0.03);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+}
