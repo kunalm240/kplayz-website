@@ -353,3 +353,12 @@ body::before {
   pointer-events: none;
   z-index: -1;
 }
+
+/* 🔒 FIX FLOATING SERIES TEXT BUG */
+.series-info {
+  position: relative;
+}
+
+.series-grid > .series-info {
+  display: none !important;
+}
