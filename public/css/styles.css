@@ -539,3 +539,101 @@ body > *:not(.ps-bg-layer){
   background:#222;
   margin:60px auto 0;
 }
+
+/* ===== PREMIUM EDITORIAL INFO LAYOUT ===== */
+
+.info-section{
+  padding:120px 0;
+}
+
+.info-section .container{
+  max-width:720px;       /* narrow reading column */
+}
+
+.info-section .section-title{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:40px;
+  text-align:left;
+}
+
+.info-paragraph{
+  font-size:15px;
+  line-height:1.9;
+  color:#bbb;
+  text-align:left;
+}
+
+.info-list{
+  margin-top:10px;
+}
+
+.info-list p{
+  margin:10px 0;
+  color:#bbb;
+  line-height:1.8;
+}
+
+.info-card{
+  border:1px solid #222;
+  padding:24px;
+  margin:16px 0;
+  background:#000;
+}
+
+.info-card h3{
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+.info-note{
+  margin-top:20px;
+  font-size:13px;
+  color:#777;
+}
+
+/* ===== PERFORMANCE CARDS – REFINED ===== */
+.perf-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+.perf-card{
+  border:1px solid #222;
+  padding:26px 20px;
+  text-align:left;
+  background:#000;
+}
+
+.perf-value{
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+.perf-label{
+  font-size:12px;
+  letter-spacing:1px;
+  color:#777;
+}
+
+/* ===== TIMELINE – EDITORIAL STYLE ===== */
+.timeline{
+  border-left:1px solid #222;
+  padding-left:18px;
+  margin-top:10px;
+}
+
+.timeline-item{
+  margin:14px 0;
+  color:#bbb;
+  line-height:1.7;
+}
+
+/* ===== SECTION DIVIDER (SUBTLE) ===== */
+.info-section + .info-section{
+  border-top:1px solid #111;
+}
