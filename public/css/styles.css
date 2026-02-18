@@ -280,7 +280,8 @@ section{
 .social-icon svg{
   width:18px;
   height:18px;
-  fill:currentColor;
+  stroke:currentColor;
+  fill:none;
 }
 
 .social-icon:hover{
