@@ -1,228 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KPLAYZ – Premium Gaming</title>
-<link rel="stylesheet" href="/css/styles.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KPLAYZ – Premium Gaming Creator</title>
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="navbar-container">
-    <div class="navbar-logo">
-      <div class="logo-icon">
-        <img src="/images/logo.png" alt="KPLAYZ logo">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <img src="/images/logo.png" alt="KPLAYZ logo" class="logo-icon" />
+        <span class="logo-text">KPLAYZ</span>
       </div>
-      <span class="logo-text">KPLAYZ</span>
+
+      <ul class="nav-menu">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#featured" class="nav-link">Featured</a></li>
+        <li><a href="#stats" class="nav-link">Stats</a></li>
+        <li><a href="#series" class="nav-link">Series</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <ul class="nav-menu">
-      <li><a href="#hero" class="nav-link">Home</a></li>
-      <li><a href="#featured" class="nav-link">Featured</a></li>
-      <li><a href="#stats" class="nav-link">Stats</a></li>
-      <li><a href="#series" class="nav-link">Series</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <img src="/images/logo.png" alt="KPLAYZ logo" class="hero-logo" />
 
-<!-- HERO -->
-<section id="hero" class="hero">
-  <div class="hero-content">
-    <img src="/images/logo.png" class="hero-logo" alt="KPLAYZ logo">
-    <h1 class="hero-title">KPLAYZ</h1>
-    <p class="hero-tagline">Just the Game</p>
+      <h1 class="hero-title">KPLAYZ</h1>
+      <p class="hero-tagline">Just the Game</p>
 
-    <div class="hero-buttons">
-      <a href="#featured" class="btn btn-primary">Watch Latest</a>
-
-      <a href="https://www.youtube.com/channel/UCQ0c2i4bBA0NU8Ikpr2fX3g?sub_confirmation=1"
-         target="_blank"
-         class="btn btn-secondary">
-        Subscribe
-      </a>
-    </div>
-
- <div class="hero-social">
-
-  <!-- YOUTUBE -->
-  <a href="https://youtube.com/@kplayz_official" target="_blank" class="social-icon">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.8 15.5V8.5l6.2 3.5-6.2 3.5z"/>
-    </svg>
-  </a>
-
-  <!-- INSTAGRAM -->
-  <a href="https://instagram.com/kplayz_official" target="_blank" class="social-icon">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-      <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 
-      5-5V7c0-2.8-2.2-5-5-5H7zm5 4a6 6 0 1 1 0 12 6 6 0 0 1 
-      0-12zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 
-      0-8zm4.8-2.3a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"/>
-    </svg>
-  </a>
-
-  <!-- TWITTER / X -->
-  <a href="https://x.com/kplayz_official" target="_blank" class="social-icon">
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-      <path d="M18 2h3l-7.5 8.5L22 22h-6l-4.7-6.2L6 22H3l8-9.1L2 2h6l4.3 5.6L18 2z"/>
-    </svg>
-  </a>
-
-</div>
-</section>
-
-  <section class="activity-strip">
-  <div class="container">
-    <p>Current Series — Grand Theft Auto V: Story Mode</p>
-    <p>Content Format — Cinematic Gameplay • No Commentary</p>
-    <p>Upcoming Titles — Red Dead Redemption II • Marvel’s Spider-Man • The Last of Us</p>
-  </div>
-</section>
-<!-- FEATURED -->
-<section id="featured" class="featured">
-  <div class="container">
-    <h2 class="section-title">Latest Video</h2>
-
-    <div class="featured-grid">
-
-      <div id="videoContainer" class="featured-video" style="display:none;">
-        <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <div id="videoPlaceholder" class="video-placeholder">
-        Loading video...
-      </div>
-
-      <div class="featured-info">
-        <h3 id="videoTitle">Loading...</h3>
-        <p id="videoDescription">Please wait</p>
-        <p id="videoDate"></p>
-        <a href="https://youtube.com/@kplayz_official/videos" target="_blank" class="btn btn-primary">
-          Watch on YouTube
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="watchLatest()">Watch Latest</button>
+        <a href="https://youtube.com/@kplayz_official" target="_blank" class="btn btn-secondary">
+          Subscribe
         </a>
       </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- STATS -->
-<section id="stats" class="stats-section">
-  <div class="container">
-    <h2 class="section-title">Channel Stats</h2>
+  <!-- FEATURED VIDEO -->
+  <section id="featured" class="featured">
+    <div class="container">
+      <h2 class="section-title">Latest Video</h2>
 
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value" id="statSubscribers">0</div>
-        <div class="stat-label">Subscribers</div>
-      </div>
+      <div class="featured-grid">
+        <div class="featured-video" id="videoContainer" style="display:none;">
+          <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
+        </div>
 
-      <div class="stat-card">
-        <div class="stat-value" id="statViews">0</div>
-        <div class="stat-label">Total Views</div>
-      </div>
+        <div id="videoPlaceholder" class="video-placeholder">
+          Loading latest video...
+        </div>
 
-      <div class="stat-card">
-        <div class="stat-value" id="statVideos">0</div>
-        <div class="stat-label">Videos</div>
+        <div class="featured-info">
+          <h3 id="videoTitle">Latest Upload</h3>
+          <p id="videoDescription">Cinematic gameplay from PlayStation 5</p>
+          <p id="videoDate"></p>
+
+          <a href="https://youtube.com/@kplayz_official/videos"
+             target="_blank"
+             class="btn btn-primary">
+            Watch on YouTube
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  <section class="media-kit">
-  <div class="container">
-    <h2 class="section-title">Media Kit</h2>
+  <!-- STATS -->
+  <section id="stats" class="stats-section">
+    <div class="container">
+      <h2 class="section-title">Channel Stats</h2>
 
-    <div class="media-grid">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="statSubscribers">0</div>
+          <div class="stat-label">Subscribers</div>
+        </div>
 
-      <div class="media-card">
-        <h3>Channel Reach</h3>
-        <p>No commentary cinematic gameplay</p>
-        <p>High retention PS5 audience</p>
+        <div class="stat-card">
+          <div class="stat-value" id="statViews">0</div>
+          <div class="stat-label">Total Views</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value" id="statVideos">0</div>
+          <div class="stat-label">Videos</div>
+        </div>
       </div>
-
-      <div class="media-card">
-        <h3>Content Style</h3>
-        <p>Story-driven gameplay</p>
-        <p>Premium visuals</p>
-      </div>
-
-      <div class="media-card">
-        <h3>Partnership</h3>
-        <p>Game promotions</p>
-        <p>Hardware showcases</p>
-      </div>
-
     </div>
+  </section>
 
-    <a href="mailto:kplayz.official@gmail.com" class="btn btn-primary">
-      Request Media Kit
-    </a>
-
-  </div>
-</section>
-
-<!-- SERIES -->
-<section id="series" class="series-section">
-  <div class="container">
-
-    <!-- LATEST UPLOADS GRID -->
-    <h2 class="section-title" style="margin-top:4rem;">Latest Uploads</h2>
-    <div id="seriesGrid"></div>
-
-  </div>
-</section>
-
+  <!-- SERIES (DYNAMIC ONLY) -->
   <section id="series" class="series-section">
-  <div class="container">
+    <div class="container">
+      <h2 class="section-title">Current Series</h2>
+      <div id="seriesGrid"></div>
+    </div>
+  </section>
 
-    
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
 
-    
-    <!-- CURRENT SERIES (AUTO PLAYLISTS) -->
-    <h2 class="section-title">Current Series</h2>
-    <div class="series-grid" id="playlistGrid"></div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <input type="text" id="name" placeholder="Name" required />
+        </div>
 
-    <!-- GTA V CARD -->
-    <div class="series-card"
-     onclick="window.open('https://www.youtube.com/playlist?list=PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8','_blank')">
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
 
-  <div class="series-thumbnail">
-    <img src="/images/gta5-banner.jpg" alt="GTA V">
-  </div>
+        <div class="form-group">
+          <input type="text" id="subject" placeholder="Subject" required />
+        </div>
 
-  <div class="series-info">
-    <h3>GTA V — Story Mode</h3>
-    <p>Ongoing cinematic no-commentary gameplay</p>
-  </div>
+        <div class="form-group">
+          <textarea id="message" placeholder="Message" rows="5" required></textarea>
+        </div>
 
-</div>
-<!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="container">
-    <h2 class="section-title">Get in Touch</h2>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <div id="formMessage" class="form-message" style="display:none;"></div>
+      </form>
+    </div>
+  </section>
 
-    <form class="contact-form" id="contactForm">
-      <input type="text" id="name" placeholder="Name" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="text" id="subject" placeholder="Subject" required>
-      <textarea id="message" rows="5" placeholder="Message" required></textarea>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 KPLAYZ</p>
+    </div>
+  </footer>
 
-      <button type="submit" class="btn btn-primary">Send Message</button>
-      <div id="formMessage"></div>
-    </form>
-  </div>
-</section>
-
-<footer class="footer">
-  © 2026 KPLAYZ
-</footer>
-
-<script src="/js/app.js"></script>
+  <!-- JS -->
+  <script src="/js/app.js"></script>
 </body>
 </html>
