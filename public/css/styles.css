@@ -91,6 +91,18 @@ section{
 .btn-primary{border-color:#fff}
 .btn:hover{background:#111}
 
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:10px;
+}
+
+.hero-buttons .btn{
+  min-width:140px;
+  text-align:center;
+}
+
 /* TITLES */
 .section-title{
   text-align:center;
