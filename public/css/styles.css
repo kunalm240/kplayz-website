@@ -69,20 +69,29 @@ section{
 }
 
 /* PlayStation symbol background */
-.hero::before{
-  content:"△ ○ ✕ □";
+/* PLAYSTATION SVG BACKGROUND */
+.ps-bg{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  font-size:120px;
-  letter-spacing:60px;
-  color:#ffffff40;   /* increased visibility */
-  white-space:nowrap;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   pointer-events:none;
-  user-select:none;
   z-index:0;
-  filter:blur(1px);  /* soft premium blur */
+}
+
+.ps-bg svg{
+  width:90%;
+  max-width:900px;
+  opacity:0.06; /* visible but subtle */
+  filter:blur(2px);
+}
+
+.ps-bg text{
+  fill:#fff;
+  font-size:140px;
+  letter-spacing:60px;
+  font-family:system-ui;
 }
 
 /* Keep hero content above symbols */
