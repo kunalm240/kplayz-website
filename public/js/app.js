@@ -49,7 +49,7 @@ function loadSeries() {
   const playlists = [
     {
       name: "GTA V Cinematic",
-      url: "https://youtube.com/playlist?list=YOUR_PLAYLIST_ID",
+      url: "https://youtube.com/playlist?list=PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8",
       image: "/images/gta-v.jpg"
     }
   ];
