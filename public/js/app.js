@@ -1,162 +1,163 @@
 const API_BASE = window.location.origin;
 
 /* ================= NAVBAR GLASS SCROLL ================= */
-window.addEventListener('scroll',()=>{
-  const nav=document.querySelector('.navbar');
-  if(window.scrollY>20){nav.classList.add('scrolled')}
-  else{nav.classList.remove('scrolled')}
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.navbar');
+  if (window.scrollY > 20) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
 });
 
 /* ================= FADE IN ON SCROLL ================= */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
-},{threshold:.15});
+}, { threshold: 0.15 });
 
-document.querySelectorAll('section').forEach(sec=>{
+document.querySelectorAll('section').forEach(sec => {
   sec.classList.add('fade-in');
   observer.observe(sec);
 });
 
 /* ================= NUMBER FORMAT ================= */
-function formatNumber(num){
-  if(num>=1000000)return (num/1000000).toFixed(1)+'M';
-  if(num>=1000)return (num/1000).toFixed(1)+'K';
+function formatNumber(num) {
+  if (!num) return "0";
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
+  if (num >= 1000) return (num / 1000).toFixed(1) + "K";
   return num;
 }
 
 /* ================= ANIMATE COUNTER ================= */
-function animateCounter(el,target){
-  let count=0;
-  const speed=target/60;
-  const update=()=>{
-    count+=speed;
-    if(count<target){
-      el.textContent=formatNumber(Math.floor(count));
+function animateCounter(el, target) {
+  if (!el) return;
+  let count = 0;
+  const speed = target / 60;
+
+  const update = () => {
+    count += speed;
+    if (count < target) {
+      el.textContent = formatNumber(Math.floor(count));
       requestAnimationFrame(update);
-    }else{
-      el.textContent=formatNumber(target);
+    } else {
+      el.textContent = formatNumber(target);
     }
   };
+
   update();
 }
 
 /* ================= LOAD STATS ================= */
-async function loadStats(){
-  const res=await fetch(`${API_BASE}/api/youtube/stats`);
-  const data=await res.json();
+async function loadStats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/youtube/stats`);
+    const data = await res.json();
 
-  animateCounter(document.getElementById('statSubscribers'),data.subscribers);
-  animateCounter(document.getElementById('statViews'),data.totalViews);
-  animateCounter(document.getElementById('statVideos'),data.totalVideos);
+    animateCounter(document.getElementById('statSubscribers'), data.subscribers);
+    animateCounter(document.getElementById('statViews'), data.totalViews);
+    animateCounter(document.getElementById('statVideos'), data.totalVideos);
+  } catch (err) {
+    console.error("Stats error:", err);
+  }
 }
 
 /* ================= LOAD LATEST VIDEO ================= */
-async function loadLatestVideo(){
-  const res=await fetch(`${API_BASE}/api/youtube/latest`);
-  const video=await res.json();
-  if(!video.videoId)return;
+async function loadLatestVideo() {
+  try {
+    const res = await fetch(`${API_BASE}/api/youtube/latest`);
+    const video = await res.json();
 
-  const player=document.getElementById('ytPlayer');
-  const container=document.getElementById('videoContainer');
-  const placeholder=document.getElementById('videoPlaceholder');
+    if (!video.videoId) return;
 
-  player.src=`https://www.youtube.com/embed/${video.videoId}`;
-  container.style.display='block';
-  placeholder.style.display='none';
+    const player = document.getElementById('ytPlayer');
+    const container = document.getElementById('videoContainer');
+    const placeholder = document.getElementById('videoPlaceholder');
 
-  document.getElementById('videoTitle').textContent=video.title;
-  document.getElementById('videoDescription').textContent =
-  video.description.substring(0, 140) + '…';
-  document.getElementById('videoDate').textContent=new Date(video.publishedAt).toLocaleDateString();
+    player.src = `https://www.youtube.com/embed/${video.videoId}`;
+    container.style.display = 'block';
+    placeholder.style.display = 'none';
+
+    document.getElementById('videoTitle').textContent = video.title;
+    document.getElementById('videoDescription').textContent =
+      (video.description || "").substring(0, 140) + '…';
+    document.getElementById('videoDate').textContent =
+      new Date(video.publishedAt).toLocaleDateString();
+  } catch (err) {
+    console.error("Latest video error:", err);
+  }
 }
 
-async function loadPlaylistVideos() {
-  try {
-    const res = await fetch('/api/youtube/playlist');
-    const videos = await res.json();
-
-    const grid = document.getElementById('seriesGrid');
-
-    if (!videos || videos.length === 0) {
-      grid.innerHTML = '<p>No videos yet.</p>';
-      return;
+/* ================= CINEMATIC SERIES BANNER ================= */
+function loadSeries() {
+  const playlists = [
+    {
+      name: "GTA V — Story Mode",
+      id: "PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8",
+      image: "/images/gta-v.jpg",
+      description: "Ongoing cinematic no-commentary gameplay"
     }
+  ];
 
-    grid.innerHTML = videos.map(video => `
-      <div class="series-card">
-        <a href="https://youtube.com/watch?v=${video.videoId}" target="_blank">
-          <div class="series-thumbnail">
-            <img src="${video.thumbnail}" alt="${video.title}">
-          </div>
-          <div class="series-info">
-            <h3>${video.title}</h3>
-            <p>${new Date(video.publishedAt).toLocaleDateString()}</p>
-          </div>
-        </a>
+  const grid = document.getElementById("seriesGrid");
+  if (!grid) return;
+
+  grid.innerHTML = playlists.map(pl => `
+    <a href="https://youtube.com/playlist?list=${pl.id}"
+       target="_blank"
+       class="series-banner">
+
+      <img src="${pl.image}" alt="${pl.name}">
+
+      <div class="series-info">
+        <h3>${pl.name}</h3>
+        <p>${pl.description}</p>
       </div>
-    `).join('');
 
-  } catch (err) {
-    console.error(err);
-  }
+    </a>
+  `).join("");
 }
 
-async function loadPlaylists() {
+/* ================= WATCH LATEST BUTTON ================= */
+function watchLatest() {
+  window.open("https://youtube.com/@kplayz_official/videos", "_blank");
+}
+
+/* ================= CONTACT FORM ================= */
+document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
   try {
-    const res = await fetch('/api/youtube/playlists');
-    const playlists = await res.json();
+    const res = await fetch(`${API_BASE}/api/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+      })
+    });
 
-    const container = document.getElementById('playlistGrid');
+    const result = await res.json();
+    const msg = document.getElementById('formMessage');
 
-    if (!playlists || playlists.length === 0) {
-      container.innerHTML = '<p>No playlists yet.</p>';
-      return;
+    msg.style.display = 'block';
+
+    if (res.ok) {
+      msg.className = 'form-message success';
+      msg.textContent = 'Message sent! Thank you!';
+      e.target.reset();
+    } else {
+      msg.className = 'form-message error';
+      msg.textContent = result.error || 'Failed to send';
     }
-
-    container.innerHTML = playlists.map(pl => {
-      container.innerHTML = playlists.map(pl => `
-  <div class="series-card"
-       onclick="window.open('https://youtube.com/playlist?list=${pl.id}','_blank')">
-
-    <div class="series-thumbnail">
-      <img src="${pl.thumbnail}" alt="${pl.title}">
-    </div>
-
-    <div class="series-info">
-      <h3>${pl.title}</h3>
-      <p>${pl.count} videos</p>
-    </div>
-
-  </div>
-`).join('');
-
-      return `
-        <div class="series-card"
-             onclick="window.open('https://youtube.com/playlist?list=${pl.id}','_blank')">
-          <div class="series-thumbnail">
-            <img src="${pl.thumbnail}" alt="${pl.title}">
-          </div>
-          <div class="series-info">
-            <h3>${game}</h3>
-            <p>${pl.count} videos</p>
-          </div>
-        </div>
-      `;
-    }).join('');
-
   } catch (err) {
-    console.error(err);
+    console.error("Contact error:", err);
   }
-}
+});
 
 /* ================= INIT ================= */
-window.addEventListener('load',()=>{
+window.addEventListener('load', () => {
   loadStats();
   loadLatestVideo();
-  loadPlaylistVideos();
-  loadPlaylists();
+  loadSeries();
 });
