@@ -289,3 +289,10 @@ section{
   border-color:#777;
   transform:translateY(-3px);
 }
+
+.social-icon svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+  fill:none;
+}
