@@ -17,6 +17,15 @@ section{
   padding:80px 0;
 }
 
+/* FORCE VERTICAL PAGE FLOW */
+body{
+  display:block;
+}
+
+section{
+  width:100%;
+  display:block;
+}
 /* NAVBAR */
 .navbar{
   position:fixed;
