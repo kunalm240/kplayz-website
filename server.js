@@ -6,31 +6,25 @@ const NodeCache = require('node-cache');
 require('dotenv').config();
 
 const app = express();
-const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes cache
+const cache = new NodeCache({ stdTTL: 600 });
 
-// ================= ENV =================
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 const CHANNEL_ID = 'UCQ0c2i4bBA0NU8Ikpr2fX3g';
 
-// ================= MIDDLEWARE =================
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// ================= RATE LIMIT (3 per hour) =================
+/* ================= RATE LIMIT ================= */
 const rateLimitMap = {};
-
 function rateLimit(req, res, next) {
   const ip = req.ip || req.connection.remoteAddress;
   const now = Date.now();
   const windowStart = now - 3600000;
 
-  if (!rateLimitMap[ip]) {
-    rateLimitMap[ip] = [];
-  }
-
-  rateLimitMap[ip] = rateLimitMap[ip].filter(time => time > windowStart);
+  if (!rateLimitMap[ip]) rateLimitMap[ip] = [];
+  rateLimitMap[ip] = rateLimitMap[ip].filter(t => t > windowStart);
 
   if (rateLimitMap[ip].length >= 3) {
     return res.status(429).json({ error: 'Too many requests. Max 3 per hour.' });
@@ -40,7 +34,7 @@ function rateLimit(req, res, next) {
   next();
 }
 
-// ================= YOUTUBE STATS =================
+/* ================= CHANNEL STATS ================= */
 async function getChannelStats() {
   try {
     const cached = cache.get('channelStats');
@@ -55,33 +49,29 @@ async function getChannelStats() {
     });
 
     const channel = res.data.items[0];
-    const stats = channel.statistics;
 
     const result = {
-      subscribers: parseInt(stats.subscriberCount) || 0,
-      totalViews: parseInt(stats.viewCount) || 0,
-      totalVideos: parseInt(stats.videoCount) || 0,
+      subscribers: parseInt(channel.statistics.subscriberCount) || 0,
+      totalViews: parseInt(channel.statistics.viewCount) || 0,
+      totalVideos: parseInt(channel.statistics.videoCount) || 0,
       channelTitle: channel.snippet.title,
       thumbnail: channel.snippet.thumbnails.high.url
     };
 
     cache.set('channelStats', result);
     return result;
-
-  } catch (error) {
-    console.error('YouTube Stats Error:', error.message);
+  } catch (err) {
+    console.error('YouTube Stats Error:', err.message);
     return { subscribers: 0, totalViews: 0, totalVideos: 0 };
   }
 }
 
-// ================= LATEST VIDEO =================
-// ================= LATEST VIDEO =================
+/* ================= LATEST VIDEO ================= */
 async function getLatestVideo() {
   try {
     const cached = cache.get('latestVideo');
     if (cached) return cached;
 
-    // 1️⃣ Get uploads playlist ID
     const uploadsRes = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
       params: {
         part: 'contentDetails',
@@ -93,7 +83,6 @@ async function getLatestVideo() {
     const uploadsPlaylistId =
       uploadsRes.data.items[0].contentDetails.relatedPlaylists.uploads;
 
-    // 2️⃣ Get latest video from uploads playlist
     const videoRes = await axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
       params: {
         part: 'snippet',
@@ -108,19 +97,18 @@ async function getLatestVideo() {
     const result = {
       id: video.resourceId.videoId,
       title: video.title,
-      publishedAt: new Date(video.publishedAt).toDateString()
+      publishedAt: video.publishedAt
     };
 
     cache.set('latestVideo', result);
     return result;
-
-  } catch (error) {
-    console.error('Latest Video Error:', error.message);
+  } catch (err) {
+    console.error('Latest Video Error:', err.message);
     return { id: '' };
   }
 }
 
-// ================= PLAYLIST VIDEOS =================
+/* ================= PLAYLIST VIDEOS ================= */
 async function getPlaylistVideos(playlistId) {
   try {
     const cacheKey = `playlist_${playlistId}`;
@@ -130,9 +118,9 @@ async function getPlaylistVideos(playlistId) {
     const res = await axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
       params: {
         part: 'snippet',
-        playlistId: playlistId,
-        key: YOUTUBE_API_KEY,
-        maxResults: 50
+        playlistId,
+        maxResults: 50,
+        key: YOUTUBE_API_KEY
       }
     });
 
@@ -145,51 +133,14 @@ async function getPlaylistVideos(playlistId) {
 
     cache.set(cacheKey, videos);
     return videos;
-
-  } catch (error) {
-    console.error('Playlist Error:', error.message);
+  } catch (err) {
+    console.error('Playlist Error:', err.message);
     return [];
   }
 }
 
-// ================= NODEMAILER =================
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD
-  }
-});
-
-// ================= API ROUTES =================
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date() });
-});
-
-// Channel stats
-app.get('/api/youtube/stats', async (req, res) => {
-  const stats = await getChannelStats();
-  res.json(stats);
-});
-
-// Latest video
-app.get('/api/youtube/latest', async (req, res) => {
-  const video = await getLatestVideo();
-  res.json(video);
-});
-
-// Playlist videos
-app.get('/api/youtube/playlist/:id', async (req, res) => {
-  const videos = await getPlaylistVideos(req.params.id);
-  res.json({ videos, count: videos.length });
-});
-
-// GET ALL PLAYLISTS
-// ================= GET PLAYLISTS =================
-
-    app.get('/api/youtube/playlists', async (req, res) => {
+/* ================= GET PLAYLISTS ================= */
+app.get('/api/youtube/playlists', async (req, res) => {
   try {
     const cached = cache.get('playlists');
     if (cached) return res.json(cached);
@@ -213,78 +164,34 @@ app.get('/api/youtube/playlist/:id', async (req, res) => {
 
     cache.set('playlists', playlists);
     res.json(playlists);
-
   } catch (err) {
     console.error('Playlist fetch error:', err.message);
     res.status(500).json({ error: 'Failed to fetch playlists' });
   }
 });
 
-    const playlists = response.data.items.map(pl => ({
-      id: pl.id,
-      title: pl.snippet.title,
-      thumbnail: pl.snippet.thumbnails.high.url,
-      count: pl.contentDetails.itemCount,
-      description: pl.snippet.description
-    }));
-
-    cache.set('playlists', playlists);
-    res.json(playlists);
-
-  } catch (err) {
-    console.error('Playlist fetch error:', err.message);
-    res.status(500).json({ error: 'Failed to fetch playlists' });
-  }
-});
-// Contact form
-app.post('/api/contact', rateLimit, async (req, res) => {
-  try {
-    const { name, email, subject, message } = req.body;
-
-    if (!name || !email || !subject || !message) {
-      return res.status(400).json({ error: 'All fields are required' });
-    }
-
-    const sanitize = str =>
-      str.replace(/<script.*?>.*?<\/script>/gi, '').replace(/javascript:/gi, '').trim();
-
-    const cleanName = sanitize(name);
-    const cleanEmail = sanitize(email);
-    const cleanSubject = sanitize(subject);
-    const cleanMessage = sanitize(message);
-
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER,
-      replyTo: cleanEmail,
-      subject: `[KPLAYZ] ${cleanSubject}`,
-      html: `
-        <h3>New Contact Message</h3>
-        <p><b>Name:</b> ${cleanName}</p>
-        <p><b>Email:</b> ${cleanEmail}</p>
-        <p><b>Subject:</b> ${cleanSubject}</p>
-        <p><b>Message:</b><br>${cleanMessage}</p>
-      `
-    });
-
-    res.json({ success: true, message: 'Message sent successfully!' });
-
-  } catch (error) {
-    console.error('Contact form error:', error);
-    res.status(500).json({ error: 'Failed to send message' });
-  }
+/* ================= API ROUTES ================= */
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() });
 });
 
-// ================= START SERVER =================
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get('/api/youtube/stats', async (req, res) => {
+  res.json(await getChannelStats());
 });
 
+app.get('/api/youtube/latest', async (req, res) => {
+  res.json(await getLatestVideo());
+});
+
+app.get('/api/youtube/playlist/:id', async (req, res) => {
+  const videos = await getPlaylistVideos(req.params.id);
+  res.json({ videos, count: videos.length });
+});
+
+/* ================= UPLOADS (LATEST 6) ================= */
 app.get('/api/youtube/uploads', async (req, res) => {
   try {
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6`;
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=6`;
 
     const response = await axios.get(url);
 
@@ -298,9 +205,49 @@ app.get('/api/youtube/uploads', async (req, res) => {
       }));
 
     res.json(videos);
-
   } catch (err) {
     console.error(err.response?.data || err.message);
     res.status(500).json({ error: 'Failed to fetch uploads' });
   }
 });
+
+/* ================= CONTACT ================= */
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD
+  }
+});
+
+app.post('/api/contact', rateLimit, async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    await transporter.sendMail({
+      from: process.env.GMAIL_USER,
+      to: process.env.GMAIL_USER,
+      replyTo: email,
+      subject: `[KPLAYZ] ${subject}`,
+      html: `
+        <h3>New Contact Message</h3>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b><br>${message}</p>
+      `
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Contact form error:', err);
+    res.status(500).json({ error: 'Failed to send message' });
+  }
+});
+
+/* ================= START SERVER ================= */
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
