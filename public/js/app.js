@@ -1,68 +1,113 @@
-const API_BASE = window.location.origin;
+const API = window.location.origin;
 
 function formatNumber(num) {
   if (!num) return "0";
-  if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
-  if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+  if (num >= 1e6) return (num / 1e6).toFixed(1) + "M";
+  if (num >= 1e3) return (num / 1e3).toFixed(1) + "K";
   return num;
 }
 
-function animateCounter(el, target) {
-  if (!el) return;
-  let count = 0;
-  const speed = target / 60;
-
-  const update = () => {
-    count += speed;
-    if (count < target) {
-      el.textContent = formatNumber(Math.floor(count));
-      requestAnimationFrame(update);
-    } else {
-      el.textContent = formatNumber(target);
-    }
-  };
-
-  update();
-}
-
+/* ---------- LOAD STATS ---------- */
 async function loadStats() {
   try {
-    const res = await fetch(`${API_BASE}/api/youtube/stats`);
+    const res = await fetch(`${API}/api/youtube/stats`);
     const data = await res.json();
 
-    animateCounter(document.getElementById('statSubscribers'), data.subscribers);
-    animateCounter(document.getElementById('statViews'), data.totalViews);
-    animateCounter(document.getElementById('statVideos'), data.totalVideos);
-  } catch (err) {
-    console.error(err);
+    document.getElementById("statSubscribers").textContent = formatNumber(data.subscribers);
+    document.getElementById("statViews").textContent = formatNumber(data.totalViews);
+    document.getElementById("statVideos").textContent = data.totalVideos;
+  } catch (e) {
+    console.error("Stats error", e);
   }
 }
 
+/* ---------- LOAD LATEST VIDEO ---------- */
 async function loadLatestVideo() {
   try {
-    const res = await fetch(`${API_BASE}/api/youtube/latest`);
+    const res = await fetch(`${API}/api/youtube/latest`);
     const video = await res.json();
-    if (!video.videoId) return;
 
-    const player = document.getElementById('ytPlayer');
-    const container = document.getElementById('videoContainer');
-    const placeholder = document.getElementById('videoPlaceholder');
+    if (!video?.id) return;
 
-    player.src = `https://www.youtube.com/embed/${video.videoId}`;
-    container.style.display = 'block';
-    placeholder.style.display = 'none';
+    const player = document.getElementById("ytPlayer");
+    player.src = `https://www.youtube.com/embed/${video.id}`;
 
-    document.getElementById('videoTitle').textContent = video.title;
-    document.getElementById('videoDescription').textContent =
-      (video.description || "").substring(0, 140) + '…';
-    document.getElementById('videoDate').textContent =
-      new Date(video.publishedAt).toLocaleDateString();
-  } catch (err) {
-    console.error(err);
+    document.getElementById("videoTitle").textContent = video.title;
+    document.getElementById("videoDate").textContent = video.publishedAt;
+
+    document.getElementById("videoContainer").style.display = "block";
+    document.getElementById("videoPlaceholder").style.display = "none";
+  } catch (e) {
+    console.error("Video error", e);
   }
 }
 
-window.addEventListener('load', () => {
+/* ---------- LOAD SERIES (GTA V) ---------- */
+function loadSeries() {
+  const grid = document.getElementById("seriesGrid");
+
+  const playlists = [
+    {
+      name: "GTA V Cinematic",
+      url: "https://youtube.com/playlist?list=YOUR_PLAYLIST_ID",
+      image: "/images/gta-v.jpg"
+    }
+  ];
+
+  grid.innerHTML = playlists.map(p => `
+    <a href="${p.url}" target="_blank" class="series-card">
+      <img src="${p.image}" alt="${p.name}" loading="lazy"/>
+      <div class="series-info">
+        <h3>${p.name}</h3>
+      </div>
+    </a>
+  `).join("");
+}
+
+/* ---------- CONTACT FORM ---------- */
+document.getElementById("contactForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const msg = document.getElementById("formMessage");
+
+  try {
+    const res = await fetch(`${API}/api/contact`, {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        message: message.value
+      })
+    });
+
+    const data = await res.json();
+
+    msg.style.display = "block";
+
+    if (res.ok) {
+      msg.textContent = "Message sent successfully!";
+      msg.className = "form-message success";
+      e.target.reset();
+    } else {
+      msg.textContent = "Failed to send message";
+      msg.className = "form-message error";
+    }
+  } catch {
+    msg.style.display = "block";
+    msg.textContent = "Server error";
+    msg.className = "form-message error";
+  }
+});
+
+/* ---------- CTA ---------- */
+function watchLatest() {
+  window.open("https://youtube.com/@kplayz_official/videos", "_blank");
+}
+
+/* ---------- INIT ---------- */
+window.addEventListener("load", () => {
   loadStats();
   loadLatestVideo();
+  loadSeries();
 });
