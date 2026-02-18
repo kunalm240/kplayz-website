@@ -136,5 +136,20 @@ function revealOnScroll() {
   });
 }
 
+const seriesGrid = document.getElementById("seriesGrid");
+
+if (seriesGrid) {
+  seriesGrid.addEventListener("mousemove", (e) => {
+    const { left, width } = seriesGrid.getBoundingClientRect();
+    const x = e.clientX - left;
+
+    if (x < width * 0.2) {
+      seriesGrid.scrollBy({ left: -10, behavior: "smooth" });
+    } else if (x > width * 0.8) {
+      seriesGrid.scrollBy({ left: 10, behavior: "smooth" });
+    }
+  });
+}
+
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
