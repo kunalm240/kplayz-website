@@ -295,13 +295,13 @@ section{
 .series-grid::-webkit-scrollbar-thumb{
   background:#333;
 }
-
 .series-card img{
   width:100%;
-  height:auto;
-  aspect-ratio:16/9;
-  object-fit:contain; /* show full thumbnail */
-  background:#000; /* black bars instead of crop */
+  height:180px;        /* fixed clean banner height */
+  object-fit:cover;    /* fills nicely without stretching */
+  object-position:center;
+  display:block;
+}
 }
 .stat-card{
   border:1px solid #333;
