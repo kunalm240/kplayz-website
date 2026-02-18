@@ -394,3 +394,73 @@ body > *:not(.ps-bg-layer){
   50%  { transform:translateY(-30px); }
   100% { transform:translateY(0); }
 }
+
+/* ===== PREMIUM INFO LAYOUT SYSTEM ===== */
+
+/* make each info section feel like a screen */
+.info-section{
+  padding:90px 0;
+}
+
+/* centered readable column */
+.info-section .container{
+  max-width:900px;
+}
+
+/* headings larger for authority */
+.info-section .section-title{
+  font-size:2rem;
+  margin-bottom:30px;
+}
+
+/* paragraph breathing */
+.info-paragraph{
+  font-size:15px;
+  line-height:1.8;
+}
+
+/* list spacing */
+.info-list{
+  margin:0 auto;
+  max-width:520px;
+}
+
+.info-list p{
+  text-align:left;
+  padding-left:6px;
+}
+
+/* cards grid for production + roadmap */
+.info-card{
+  border:1px solid #333;
+  padding:22px;
+  margin:14px auto;
+  max-width:520px;
+  background:#000;
+}
+
+/* performance grid already exists — increase spacing */
+.perf-grid{
+  margin-top:10px;
+  margin-bottom:28px;
+}
+
+/* timeline center align */
+.timeline{
+  margin-top:20px;
+}
+
+/* alternating background rhythm for visual separation */
+.info-section:nth-of-type(even){
+  background:#050505;
+}
+
+/* subtle section divider line */
+.info-section::after{
+  content:"";
+  display:block;
+  width:60px;
+  height:1px;
+  background:#222;
+  margin:60px auto 0;
+}
