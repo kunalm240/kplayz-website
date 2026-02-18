@@ -296,10 +296,12 @@ section{
   background:#333;
 }
 
-.series-card{
-  min-width:260px;
-  flex:0 0 auto;
-  scroll-snap-align:start;
+.series-card img{
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:contain; /* show full thumbnail */
+  background:#000; /* black bars instead of crop */
 }
 .stat-card{
   border:1px solid #333;
