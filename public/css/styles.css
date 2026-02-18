@@ -98,6 +98,19 @@ section{
   margin-top:10px;
 }
 
+.hero-buttons .btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent);
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+
+.hero-buttons .btn:hover::after{
+  opacity:1;
+}
+
 .hero-buttons .btn{
   min-width:140px;
   text-align:center;
@@ -264,8 +277,9 @@ section{
 .hero-social{
   display:flex;
   justify-content:center;
-  gap:16px;
-  margin-top:25px;
+  gap:18px;
+  margin-top:28px;
+  margin-bottom:28px; /* 👈 adds premium space before buttons */
 }
 
 .social-icon{
@@ -295,4 +309,27 @@ section{
   height:18px;
   stroke:currentColor;
   fill:none;
+}
+
+/* HERO BUTTONS — FORCE SAME STYLE */
+.hero-buttons .btn{
+  min-width:170px;
+  padding:12px 22px;
+  text-align:center;
+  font-size:14px;
+  letter-spacing:0.5px;
+
+  border:1px solid #444;     /* same border */
+  background:transparent;    /* same bg */
+  color:#fff;
+
+  transition:all 0.25s ease;
+}
+
+/* SAME HOVER FOR BOTH */
+.hero-buttons .btn:hover{
+  border-color:#777;
+  background:#111;
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(255,255,255,0.06);
 }
