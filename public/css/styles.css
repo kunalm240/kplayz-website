@@ -352,21 +352,32 @@ section{
   overflow:hidden;
 }
 
+/* ===== BACKGROUND KEYWORDS – REFINED ===== */
+.info-section{
+  position:relative;
+  overflow:hidden;
+}
+
 .info-section::before{
   content:attr(data-bg);
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  font-size:80px;
-  letter-spacing:8px;
-  color:#ffffff06;
+  top:40%;
+  left:10%;
+  transform:translateY(-50%);
+  font-size:72px;
+  letter-spacing:10px;
+  color:#ffffff05;
   white-space:nowrap;
   pointer-events:none;
   user-select:none;
   z-index:0;
+  transition:transform 0.6s ease-out;
 }
 
+.info-section:nth-child(even)::before{
+  left:auto;
+  right:10%;
+}
 .info-section .container{
   position:relative;
   z-index:1;
