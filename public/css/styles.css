@@ -371,6 +371,12 @@ section{
   display:block;
 }
 
+.series-count{
+  color:#888;
+  font-size:0.9rem;
+  margin-top:6px;
+}
+
 .series-info{padding:15px}
 
 /* ABOUT */
