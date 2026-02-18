@@ -39,7 +39,11 @@ display:flex;justify-content:space-between;align-items:center
 .hero{
 min-height:100vh;padding-top: 120px;display:flex;align-items:center;justify-content:center;
 position:relative;text-align:center;padding-top:80px;
-background:linear-gradient(135deg,#000 0%,#121212 100%);
+background: linear-gradient(
+  135deg,
+  rgba(0,0,0,0.85) 0%,
+  rgba(18,18,18,0.85) 100%
+);
 overflow:hidden
 }
 .hero::before{
