@@ -1,13 +1,5 @@
 const API_BASE = window.location.origin;
 
-/* NAVBAR SCROLL */
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('.navbar');
-  if (window.scrollY > 20) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-});
-
-/* NUMBER FORMAT */
 function formatNumber(num) {
   if (!num) return "0";
   if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
@@ -15,7 +7,6 @@ function formatNumber(num) {
   return num;
 }
 
-/* COUNTER ANIMATION */
 function animateCounter(el, target) {
   if (!el) return;
   let count = 0;
@@ -34,7 +25,6 @@ function animateCounter(el, target) {
   update();
 }
 
-/* LOAD STATS */
 async function loadStats() {
   try {
     const res = await fetch(`${API_BASE}/api/youtube/stats`);
@@ -48,7 +38,6 @@ async function loadStats() {
   }
 }
 
-/* LOAD LATEST VIDEO */
 async function loadLatestVideo() {
   try {
     const res = await fetch(`${API_BASE}/api/youtube/latest`);
@@ -73,42 +62,6 @@ async function loadLatestVideo() {
   }
 }
 
-/* WATCH LATEST BUTTON */
-function watchLatest() {
-  window.open("https://youtube.com/@kplayz_official/videos", "_blank");
-}
-
-/* CONTACT FORM */
-document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const res = await fetch(`${API_BASE}/api/contact`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      subject: document.getElementById('subject').value,
-      message: document.getElementById('message').value
-    })
-  });
-
-  const result = await res.json();
-  const msg = document.getElementById('formMessage');
-
-  msg.style.display = 'block';
-
-  if (res.ok) {
-    msg.className = 'form-message success';
-    msg.textContent = 'Message sent! Thank you!';
-    e.target.reset();
-  } else {
-    msg.className = 'form-message error';
-    msg.textContent = result.error || 'Failed to send';
-  }
-});
-
-/* INIT */
 window.addEventListener('load', () => {
   loadStats();
   loadLatestVideo();
