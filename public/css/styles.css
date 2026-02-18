@@ -144,23 +144,45 @@ padding:2rem;text-align:center;transition:.3s
 
 /* 🔥 BANNER — FULL WIDTH CINEMATIC */
 
-/* 🔥 BANNER – FULL IMAGE VISIBLE */
-.series-thumbnail {
-  width: 100%;
-  overflow: hidden;
-}
-
-.series-thumbnail img {
-  width: 100%;
-  height: auto;        /* show full banner */
-  object-fit: contain; /* no cropping */
+.series-banner {
   display: block;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #2a2a2a;
+  background: #000;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+.series-banner:hover {
+  transform: scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.series-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0.92);
+  transition: transform 0.5s ease;
+}
+
+.series-banner:hover img {
+  transform: scale(1.03);
+}
 
 /* TEXT AREA BELOW IMAGE */
 .series-info {
-  padding: 1.4rem 1.6rem 1.6rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+}
+
+.series-banner {
+  position: relative;
 }
 
 .series-info h3 {
