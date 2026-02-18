@@ -27,19 +27,32 @@ async function loadLatestVideo() {
     const res = await fetch(`${API}/api/youtube/latest`);
     const video = await res.json();
 
-    if (!video?.videoId) return;
+    /* accept both videoId and id from backend */
+    const videoId = video.videoId || video.id;
+
+    if (!videoId) {
+      console.warn("No videoId returned from API", video);
+      return;
+    }
 
     const player = document.getElementById("ytPlayer");
-    player.src = `https://www.youtube.com/embed/${video.videoId}`;
+    player.src = `https://www.youtube.com/embed/${videoId}`;
 
-    document.getElementById("videoTitle").textContent = video.title;
+    document.getElementById("videoTitle").textContent = video.title || "Latest Upload";
 
-    const date = new Date(video.publishedAt);
-    document.getElementById("videoDate").textContent =
-      date.toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" });
+    if (video.publishedAt) {
+      const date = new Date(video.publishedAt);
+      document.getElementById("videoDate").textContent =
+        date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+    }
 
     document.getElementById("videoContainer").style.display = "block";
     document.getElementById("videoPlaceholder").style.display = "none";
+
   } catch (e) {
     console.error("Video error", e);
   }
