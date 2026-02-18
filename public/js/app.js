@@ -27,13 +27,16 @@ async function loadLatestVideo() {
     const res = await fetch(`${API}/api/youtube/latest`);
     const video = await res.json();
 
-    if (!video?.id) return;
+    if (!video?.videoId) return;
 
     const player = document.getElementById("ytPlayer");
-    player.src = `https://www.youtube.com/embed/${video.id}`;
+    player.src = `https://www.youtube.com/embed/${video.videoId}`;
 
     document.getElementById("videoTitle").textContent = video.title;
-    document.getElementById("videoDate").textContent = video.publishedAt;
+
+    const date = new Date(video.publishedAt);
+    document.getElementById("videoDate").textContent =
+      date.toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" });
 
     document.getElementById("videoContainer").style.display = "block";
     document.getElementById("videoPlaceholder").style.display = "none";
@@ -42,7 +45,7 @@ async function loadLatestVideo() {
   }
 }
 
-/* ---------- LOAD SERIES (GTA V) ---------- */
+/* ---------- LOAD SERIES ---------- */
 async function loadSeries() {
   const grid = document.getElementById("seriesGrid");
 
@@ -60,7 +63,7 @@ async function loadSeries() {
         <img src="${pl.thumbnail}" alt="${pl.title}" loading="lazy"/>
         <div class="series-info">
           <h3>${pl.title}</h3>
-          <p>${pl.count} videos</p>
+          <p class="series-count">${pl.count} videos</p>
         </div>
       </a>
     `).join("");
@@ -82,9 +85,9 @@ document.getElementById("contactForm").addEventListener("submit", async e => {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        message: message.value
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
       })
     });
 
