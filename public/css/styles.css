@@ -295,6 +295,14 @@ section{
 .series-grid::-webkit-scrollbar-thumb{
   background:#333;
 }
+.series-card{
+  border:1px solid #333;
+  text-decoration:none;
+  color:#fff;
+  transition:0.3s;
+  overflow:hidden;     /* prevents image spill */
+  max-width:420px;     /* keeps card elegant */
+}
 .series-card img{
   width:100%;
   height:180px;        /* fixed clean banner height */
