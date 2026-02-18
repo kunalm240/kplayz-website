@@ -355,63 +355,6 @@ section{
 }
 
 /* ===== GLOBAL FLOATING PS SYMBOLS BACKGROUND ===== */
-body::after{
-  content:"△ ○ ✕ □  △ ○ ✕ □  △ ○ ✕ □  △ ○ ✕ □";
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;                 /* tiny symbols */
-  letter-spacing:120px;           /* spread across screen */
-  line-height:3.5;
-  color:#ffffff05;                /* very subtle */
-  pointer-events:none;
-  user-select:none;
-  z-index:0;
-  white-space:pre-wrap;
-  animation:psFloat 60s linear infinite;
-}
-
-/* slow cinematic floating */
-@keyframes psFloat{
-  0%   { transform:translateY(0); }
-  50%  { transform:translateY(-40px); }
-  100% { transform:translateY(0); }
-}
-
-/* ===== FLOATING TINY PS SYMBOLS (GUARANTEED VISIBLE) ===== */
-.ps-bg-global{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-  overflow:hidden;
-}
-
-.ps-bg-global span{
-  position:absolute;
-  font-size:18px;
-  color:#ffffff06;
-  user-select:none;
-  animation:psFloat linear infinite;
-}
-
-/* different positions + speeds for cinematic feel */
-.ps-bg-global span:nth-child(1){top:10%;left:15%;animation-duration:40s}
-.ps-bg-global span:nth-child(2){top:30%;left:70%;animation-duration:55s}
-.ps-bg-global span:nth-child(3){top:60%;left:25%;animation-duration:50s}
-.ps-bg-global span:nth-child(4){top:80%;left:80%;animation-duration:65s}
-.ps-bg-global span:nth-child(5){top:45%;left:50%;animation-duration:45s}
-.ps-bg-global span:nth-child(6){top:15%;left:85%;animation-duration:60s}
-.ps-bg-global span:nth-child(7){top:75%;left:10%;animation-duration:52s}
-.ps-bg-global span:nth-child(8){top:55%;left:40%;animation-duration:48s}
-
-@keyframes psFloat{
-  0%   { transform:translateY(0); opacity:.4; }
-  50%  { transform:translateY(-30px); opacity:.7; }
-  100% { transform:translateY(0); opacity:.4; }
-}
 
 /* ===== FIXED PS SYMBOL BACKGROUND (GUARANTEED) ===== */
 .ps-bg-fixed{
