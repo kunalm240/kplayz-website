@@ -88,34 +88,25 @@ async function loadLatestVideo() {
 
 /* ================= CINEMATIC SERIES BANNER ================= */
 function loadSeries() {
-  const playlists = [
-    {
-      name: "GTA V — Story Mode",
-      id: "PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8",
-      image: "/images/gta-v.jpg",
-      description: "Ongoing cinematic no-commentary gameplay"
-    }
-  ];
-
   const grid = document.getElementById("seriesGrid");
   if (!grid) return;
 
-  grid.innerHTML = playlists.map(pl => `
-    <a href="https://youtube.com/playlist?list=${pl.id}"
+  grid.innerHTML = `
+    <a href="https://youtube.com/playlist?list=PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8"
        target="_blank"
        class="series-banner">
 
-      <img src="${pl.image}" alt="${pl.name}">
+      <img src="https://i.ytimg.com/vi/rZDn5F5_s90/maxresdefault.jpg"
+           alt="GTA V — Story Mode">
 
       <div class="series-info">
-        <h3>${pl.name}</h3>
-        <p>${pl.description}</p>
+        <h3>GTA V — Story Mode</h3>
+        <p>Ongoing cinematic no-commentary gameplay</p>
       </div>
 
     </a>
-  `).join("");
+  `;
 }
-
 /* ================= WATCH LATEST BUTTON ================= */
 function watchLatest() {
   window.open("https://youtube.com/@kplayz_official/videos", "_blank");
