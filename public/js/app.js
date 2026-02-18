@@ -21,6 +21,22 @@ async function loadStats() {
   }
 }
 
+async function loadPerformanceSnapshot() {
+  try {
+    const res = await fetch(`${API}/api/youtube/stats`);
+    const data = await res.json();
+
+    document.getElementById("perfSubs").textContent =
+      formatNumber(data.subscribers);
+
+    document.getElementById("perfViews").textContent =
+      formatNumber(data.totalViews);
+
+  } catch (e) {
+    console.error("Performance snapshot error", e);
+  }
+}
+
 /* ---------- LOAD LATEST VIDEO ---------- */
 async function loadLatestVideo() {
   try {
@@ -116,5 +132,6 @@ function watchLatest() {
 window.addEventListener("load", () => {
   loadStats();
   loadLatestVideo();
+  loadPerformanceSnapshot();
   loadSeries();
 });
