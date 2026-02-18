@@ -356,26 +356,41 @@ section{
 
 /* ===== GLOBAL FLOATING PS SYMBOLS BACKGROUND ===== */
 
-/* ===== FIXED PS SYMBOL BACKGROUND (GUARANTEED) ===== */
-.ps-bg-fixed{
+/* ===== PS FLOATING BACKGROUND LAYER (VISIBLE VERSION) ===== */
+.ps-bg-layer{
   position:fixed;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  letter-spacing:140px;
-  line-height:4;
-  color:#ffffff08;      /* visibility level */
   pointer-events:none;
-  user-select:none;
-  z-index:-1;           /* ALWAYS behind content */
-  white-space:pre-wrap;
-  animation:psFloat 70s linear infinite;
+  z-index:0;
+  overflow:hidden;
 }
+
+/* push all real content above it */
+body > *:not(.ps-bg-layer){
+  position:relative;
+  z-index:1;
+}
+
+.ps-bg-layer span{
+  position:absolute;
+  font-size:20px;
+  color:#ffffff10;      /* increase visibility */
+  opacity:0.25;
+  animation:psFloat 40s linear infinite;
+}
+
+/* spread them across screen */
+.ps-bg-layer span:nth-child(1){top:10%;left:15%}
+.ps-bg-layer span:nth-child(2){top:30%;left:70%}
+.ps-bg-layer span:nth-child(3){top:60%;left:25%}
+.ps-bg-layer span:nth-child(4){top:80%;left:80%}
+.ps-bg-layer span:nth-child(5){top:45%;left:50%}
+.ps-bg-layer span:nth-child(6){top:15%;left:85%}
+.ps-bg-layer span:nth-child(7){top:75%;left:10%}
+.ps-bg-layer span:nth-child(8){top:55%;left:40%}
 
 @keyframes psFloat{
   0%   { transform:translateY(0); }
-  50%  { transform:translateY(-40px); }
+  50%  { transform:translateY(-30px); }
   100% { transform:translateY(0); }
 }
