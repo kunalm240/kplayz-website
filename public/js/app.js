@@ -128,6 +128,13 @@ function watchLatest() {
   window.open("https://youtube.com/@kplayz_official/videos", "_blank");
 }
 window.addEventListener("scroll", () => {
+  document.querySelectorAll(".info-section").forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    const offset = rect.top * 0.1;
+    sec.style.setProperty("--bgShift", `${offset}px`);
+  });
+});
+window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
   const progress = (scrollTop / docHeight) * 100;
