@@ -43,25 +43,32 @@ async function loadLatestVideo() {
 }
 
 /* ---------- LOAD SERIES (GTA V) ---------- */
-function loadSeries() {
+async function loadSeries() {
   const grid = document.getElementById("seriesGrid");
 
-  const playlists = [
-    {
-      name: "GTA V Cinematic",
-      url: "https://youtube.com/playlist?list=YOUR_PLAYLIST_ID",
-      image: "/images/gta-v.jpg"
-    }
-  ];
+  try {
+    const res = await fetch(`${API}/api/youtube/playlists`);
+    const playlists = await res.json();
 
-  grid.innerHTML = playlists.map(p => `
-    <a href="${p.url}" target="_blank" class="series-card">
-      <img src="${p.image}" alt="${p.name}" loading="lazy"/>
-      <div class="series-info">
-        <h3>${p.name}</h3>
-      </div>
-    </a>
-  `).join("");
+    if (!playlists.length) {
+      grid.innerHTML = `<p class="loading-text">No series found</p>`;
+      return;
+    }
+
+    grid.innerHTML = playlists.map(pl => `
+      <a href="https://youtube.com/playlist?list=${pl.id}" target="_blank" class="series-card">
+        <img src="${pl.thumbnail}" alt="${pl.title}" loading="lazy"/>
+        <div class="series-info">
+          <h3>${pl.title}</h3>
+          <p>${pl.count} videos</p>
+        </div>
+      </a>
+    `).join("");
+
+  } catch (err) {
+    console.error("Series load error:", err);
+    grid.innerHTML = `<p class="loading-text">Failed to load series</p>`;
+  }
 }
 
 /* ---------- CONTACT FORM ---------- */
