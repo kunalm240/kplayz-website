@@ -417,3 +417,47 @@ section{
   opacity:1;
   transform:translateY(0);
 }
+
+/* MOBILE FIX */
+@media (max-width:768px){
+
+  .hero{
+    min-height:70vh;
+    padding-top:80px;
+  }
+
+  .hero-logo{
+    width:80px;
+  }
+
+  .hero-title{
+    font-size:2rem;
+  }
+
+  .section-title{
+    font-size:1.5rem;
+  }
+
+  .featured-video{
+    max-width:100%;
+  }
+
+  .featured-info{
+    max-width:100%;
+    padding:0 10px;
+  }
+
+  .stats-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .hero-buttons .btn{
+    width:100%;
+  }
+
+}
