@@ -195,12 +195,29 @@ section{
   border:1px solid #333;
   text-decoration:none;
   color:#fff;
-  transition:0.3s;
+  transition:all 0.35s ease;
+  position:relative;
+  overflow:hidden;
+  background:#000;
+}
+
+.series-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent, #ffffff10, transparent);
+  opacity:0;
+  transition:opacity 0.35s ease;
 }
 
 .series-card:hover{
-  transform:translateY(-4px);
+  transform:translateY(-8px) scale(1.01);
   border-color:#777;
+  box-shadow:0 10px 30px #000, 0 0 20px #ffffff10;
+}
+
+.series-card:hover::after{
+  opacity:1;
 }
 
 .series-card img{
