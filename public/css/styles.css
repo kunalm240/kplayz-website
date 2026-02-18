@@ -219,11 +219,26 @@ section{
 
 /* SERIES */
 .series-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  display:flex;
   gap:20px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:10px;
 }
 
+.series-grid::-webkit-scrollbar{
+  height:6px;
+}
+
+.series-grid::-webkit-scrollbar-thumb{
+  background:#333;
+}
+
+.series-card{
+  min-width:260px;
+  flex:0 0 auto;
+  scroll-snap-align:start;
+}
 .stat-card{
   border:1px solid #333;
   padding:30px;
