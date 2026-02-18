@@ -347,21 +347,34 @@ section{
 }
 
 /* ===== BACKGROUND KEYWORDS ===== */
+
+
+/* ===== INFO SECTION ALIGNMENT FIX ===== */
 .info-section{
-  position:relative;
-  overflow:hidden;
+  padding:120px 0;
+  text-align:center;           /* center the whole section */
 }
 
-/* ===== BACKGROUND KEYWORDS – REFINED ===== */
-.info-section{
-  position:relative;
-  overflow:hidden;
+.info-section .container{
+  max-width:720px;
+  margin:0 auto;
 }
 
-.info-section + .info-section{
-  border-top:1px solid #111;
+.info-section .section-title{
+  text-align:center;           /* FIX: title centered */
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:50px;
 }
 
+.info-paragraph{
+  font-size:15px;
+  line-height:1.9;
+  color:#bbb;
+  text-align:center;           /* FIX: paragraph centered */
+  max-width:640px;
+  margin:0 auto;
+}
 .info-section::before{
   transform:translateY(calc(-50% + var(--bgShift, 0px)));
 }
