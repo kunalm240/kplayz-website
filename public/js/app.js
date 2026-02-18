@@ -27,64 +27,41 @@ async function loadLatestVideo() {
     const res = await fetch(`${API}/api/youtube/latest`);
     const video = await res.json();
 
-    /* accept both videoId and id from backend */
-    const videoId = video.videoId || video.id;
-
-    if (!videoId) {
-      console.warn("No videoId returned from API", video);
-      return;
-    }
+    if (!video?.id) return;
 
     const player = document.getElementById("ytPlayer");
-    player.src = `https://www.youtube.com/embed/${videoId}`;
+    player.src = `https://www.youtube.com/embed/${video.id}`;
 
-    document.getElementById("videoTitle").textContent = video.title || "Latest Upload";
-
-    if (video.publishedAt) {
-      const date = new Date(video.publishedAt);
-      document.getElementById("videoDate").textContent =
-        date.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        });
-    }
+    document.getElementById("videoTitle").textContent = video.title;
+    document.getElementById("videoDate").textContent = video.publishedAt;
 
     document.getElementById("videoContainer").style.display = "block";
     document.getElementById("videoPlaceholder").style.display = "none";
-
   } catch (e) {
     console.error("Video error", e);
   }
 }
 
-/* ---------- LOAD SERIES ---------- */
-async function loadSeries() {
+/* ---------- LOAD SERIES (GTA V) ---------- */
+function loadSeries() {
   const grid = document.getElementById("seriesGrid");
 
-  try {
-    const res = await fetch(`${API}/api/youtube/playlists`);
-    const playlists = await res.json();
-
-    if (!playlists.length) {
-      grid.innerHTML = `<p class="loading-text">No series found</p>`;
-      return;
+  const playlists = [
+    {
+      name: "GTA V Cinematic",
+      url: "https://youtube.com/playlist?list=YOUR_PLAYLIST_ID",
+      image: "/images/gta-v.jpg"
     }
+  ];
 
-    grid.innerHTML = playlists.map(pl => `
-      <a href="https://youtube.com/playlist?list=${pl.id}" target="_blank" class="series-card">
-        <img src="${pl.thumbnail}" alt="${pl.title}" loading="lazy"/>
-        <div class="series-info">
-          <h3>${pl.title}</h3>
-          <p class="series-count">${pl.count} videos</p>
-        </div>
-      </a>
-    `).join("");
-
-  } catch (err) {
-    console.error("Series load error:", err);
-    grid.innerHTML = `<p class="loading-text">Failed to load series</p>`;
-  }
+  grid.innerHTML = playlists.map(p => `
+    <a href="${p.url}" target="_blank" class="series-card">
+      <img src="${p.image}" alt="${p.name}" loading="lazy"/>
+      <div class="series-info">
+        <h3>${p.name}</h3>
+      </div>
+    </a>
+  `).join("");
 }
 
 /* ---------- CONTACT FORM ---------- */
@@ -98,9 +75,9 @@ document.getElementById("contactForm").addEventListener("submit", async e => {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
+        name: name.value,
+        email: email.value,
+        message: message.value
       })
     });
 
@@ -134,38 +111,3 @@ window.addEventListener("load", () => {
   loadLatestVideo();
   loadSeries();
 });
-
-/* SCROLL REVEAL */
-const reveals = document.querySelectorAll("section");
-
-function revealOnScroll() {
-  const trigger = window.innerHeight * 0.85;
-
-  reveals.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-
-    if (top < trigger) {
-      sec.classList.add("reveal", "active");
-    } else {
-      sec.classList.remove("active");
-    }
-  });
-}
-
-const seriesGrid = document.getElementById("seriesGrid");
-
-if (seriesGrid) {
-  seriesGrid.addEventListener("mousemove", (e) => {
-    const { left, width } = seriesGrid.getBoundingClientRect();
-    const x = e.clientX - left;
-
-    if (x < width * 0.2) {
-      seriesGrid.scrollBy({ left: -10, behavior: "smooth" });
-    } else if (x > width * 0.8) {
-      seriesGrid.scrollBy({ left: 10, behavior: "smooth" });
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
