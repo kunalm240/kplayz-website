@@ -187,6 +187,7 @@ app.get('/api/youtube/playlist/:id', async (req, res) => {
 });
 
 // GET ALL PLAYLISTS
+// ================= GET PLAYLISTS =================
 app.get('/api/youtube/playlists', async (req, res) => {
   try {
     const cached = cache.get('playlists');
@@ -217,7 +218,6 @@ app.get('/api/youtube/playlists', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch playlists' });
   }
 });
-
 // Contact form
 app.post('/api/contact', rateLimit, async (req, res) => {
   try {
