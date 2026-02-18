@@ -63,6 +63,40 @@ section{
   justify-content:center;
   text-align:center;
   padding-top:100px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* PlayStation background layer */
+.hero::before{
+  content:"△ ○ ✕ □";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:140px;
+  letter-spacing:60px;
+  color:#ffffff08;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+
+/* Make content above background */
+.hero-content{
+  position:relative;
+  z-index:1;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUpHero 0.9s ease forwards;
+}
+
+@keyframes fadeUpHero{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .hero-logo{width:100px;margin-bottom:20px}
