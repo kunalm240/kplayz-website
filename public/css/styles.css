@@ -358,6 +358,14 @@ section{
   overflow:hidden;
 }
 
+.info-section + .info-section{
+  border-top:1px solid #111;
+}
+
+.info-section::before{
+  transform:translateY(calc(-50% + var(--bgShift, 0px)));
+}
+
 .info-section::before{
   content:attr(data-bg);
   position:absolute;
@@ -384,23 +392,23 @@ section{
 }
 
 /* ===== SCROLL REVEAL (BOTH DIRECTIONS) ===== */
+/* ===== REFINED SCROLL REVEAL ===== */
 .reveal{
   opacity:0;
-  transform:translateY(50px);
-  transition:opacity 0.9s ease, transform 0.9s ease;
+  transform:translateY(30px);
+  transition:opacity 1s ease, transform 1s ease;
 }
 
 .reveal.active{
   opacity:1;
   transform:translateY(0);
 }
-
 /* ===== SCROLL PROGRESS INDICATOR ===== */
 .scroll-indicator{
   position:fixed;
   top:0;
-  right:18px;
-  width:2px;
+  right:16px;
+  width:1px;
   height:100vh;
   background:#111;
   z-index:999;
@@ -409,8 +417,8 @@ section{
 .scroll-bar{
   width:100%;
   height:0;
-  background:#777;
-  transition:height 0.15s linear;
+  background:linear-gradient(to bottom,#777,#aaa);
+  transition:height 0.1s linear;
 }
 
 /* SAME HOVER FOR BOTH */
