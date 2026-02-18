@@ -188,7 +188,8 @@ app.get('/api/youtube/playlist/:id', async (req, res) => {
 
 // GET ALL PLAYLISTS
 // ================= GET PLAYLISTS =================
-app.get('/api/youtube/playlists', async (req, res) => {
+
+    app.get('/api/youtube/playlists', async (req, res) => {
   try {
     const cached = cache.get('playlists');
     if (cached) return res.json(cached);
@@ -201,6 +202,23 @@ app.get('/api/youtube/playlists', async (req, res) => {
         key: YOUTUBE_API_KEY
       }
     });
+
+    const playlists = response.data.items.map(pl => ({
+      id: pl.id,
+      title: pl.snippet.title,
+      thumbnail: pl.snippet.thumbnails.high.url,
+      count: pl.contentDetails.itemCount,
+      description: pl.snippet.description
+    }));
+
+    cache.set('playlists', playlists);
+    res.json(playlists);
+
+  } catch (err) {
+    console.error('Playlist fetch error:', err.message);
+    res.status(500).json({ error: 'Failed to fetch playlists' });
+  }
+});
 
     const playlists = response.data.items.map(pl => ({
       id: pl.id,
