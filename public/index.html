@@ -3,51 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KPLAYZ – Premium Gaming Creator</title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <meta name="description" content="KPLAYZ - Cinematic PS5 gameplay. No commentary. Just the Game."/>
+  <title>KPLAYZ - Premium Gaming Creator</title>
+
+  <link rel="stylesheet" href="/css/styles.css"/>
 </head>
+
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
   <div class="navbar-container">
     <div class="navbar-logo">
-      <img src="/images/logo.png" alt="KPLAYZ logo" class="logo-icon" />
+      <img src="/images/logo.png" alt="KPLAYZ logo" class="logo-icon"/>
       <span class="logo-text">KPLAYZ</span>
     </div>
+
     <ul class="nav-menu">
       <li><a href="#hero">Home</a></li>
       <li><a href="#featured">Featured</a></li>
       <li><a href="#stats">Stats</a></li>
       <li><a href="#series">Series</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero" class="hero">
   <div class="hero-content">
-    <img src="/images/logo.png" alt="KPLAYZ logo" class="hero-logo" />
+    <img src="/images/logo.png" alt="KPLAYZ logo" class="hero-logo"/>
     <h1 class="hero-title">KPLAYZ</h1>
     <p class="hero-tagline">Just the Game</p>
+
+    <div class="hero-buttons">
+      <button class="btn btn-primary" onclick="watchLatest()">Watch Latest</button>
+      <a href="https://youtube.com/@kplayz_official" target="_blank" class="btn btn-secondary">Subscribe</a>
+    </div>
   </div>
 </section>
 
+<!-- FEATURED VIDEO -->
 <section id="featured" class="featured">
   <div class="container">
     <h2 class="section-title">Latest Video</h2>
 
-    <div class="featured-video" id="videoContainer" style="display:none;">
-      <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
+    <div class="featured-grid">
+      <div class="featured-video" id="videoContainer" style="display:none;">
+        <iframe id="ytPlayer" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div id="videoPlaceholder" class="video-placeholder">
+        Loading latest video...
+      </div>
+
+      <div class="featured-info">
+        <h3 id="videoTitle">Latest Upload</h3>
+        <p id="videoDate" class="video-date"></p>
+
+        <a href="https://youtube.com/@kplayz_official/videos" target="_blank" class="btn btn-primary">
+          Watch on YouTube
+        </a>
+      </div>
     </div>
-
-    <div id="videoPlaceholder">Loading latest video...</div>
-
-    <h3 id="videoTitle"></h3>
-    <p id="videoDescription"></p>
-    <p id="videoDate"></p>
   </div>
 </section>
 
+<!-- STATS -->
 <section id="stats" class="stats-section">
   <div class="container">
     <h2 class="section-title">Channel Stats</h2>
@@ -71,46 +94,63 @@
   </div>
 </section>
 
-<!-- WORKING STATIC SERIES -->
+<!-- SERIES -->
 <section id="series" class="series-section">
   <div class="container">
-    <h2 class="section-title">Current Series</h2>
+    <h2 class="section-title">Series</h2>
 
-    <div class="series-grid">
-
-      <a href="https://youtube.com/playlist?list=PLv0ioCII79zwUpg9nxl9KwP-I1mjFgjs8"
-         target="_blank"
-         class="series-card">
-
-        <div class="series-thumbnail">
-          <img src="https://i.ytimg.com/vi/rZDn5F5_s90/hqdefault.jpg"
-               alt="GTA V Story Mode">
-        </div>
-
-        <div class="series-info">
-          <h3>GTA V — Story Mode</h3>
-          <p>Ongoing cinematic no-commentary gameplay</p>
-        </div>
-
-      </a>
-
+    <div class="series-grid" id="seriesGrid">
+      <p class="loading-text">Loading series...</p>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="container">
+    <h2 class="section-title">About KPLAYZ</h2>
+
+    <div class="about-content">
+      <p>
+        KPLAYZ is a no-commentary gaming channel focused on cinematic,
+        story-driven gameplay. Every video is designed to deliver a pure,
+        uninterrupted experience — just the game.
+      </p>
+
+      <p>
+        The content emphasizes immersive PS5 visuals, clean UI-free presentation,
+        and movie-like pacing. Each series is structured so viewers can experience
+        full game stories seamlessly.
+      </p>
+
+      <p>
+        The goal is to build a premium cinematic gaming library where games can be
+        watched like films.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact" class="contact-section">
   <div class="container">
     <h2 class="section-title">Contact</h2>
 
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Name" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <textarea id="message" placeholder="Message" required></textarea>
-      <button type="submit">Send</button>
-      <div id="formMessage" style="display:none;"></div>
+    <form id="contactForm" class="contact-form">
+      <input type="text" id="name" placeholder="Your Name" required/>
+      <input type="email" id="email" placeholder="Your Email" required/>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+
+      <div id="formMessage" class="form-message" style="display:none;"></div>
+
+      <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
   </div>
 </section>
+
+<footer class="footer">
+  <p>© 2026 KPLAYZ. All rights reserved.</p>
+</footer>
 
 <script src="/js/app.js"></script>
 </body>
