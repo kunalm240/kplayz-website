@@ -11,12 +11,16 @@ body{
   background:#000;
   color:#fff;
   line-height:1.6;
+
+  /* 🔴 FORCE VERTICAL PAGE FLOW */
+  display:flex;
+  flex-direction:column;
 }
 
-/* ===== GLOBAL FLOW FIX ===== */
+/* FORCE ALL DIRECT CHILDREN TO STACK VERTICALLY */
 body > *{
-  display:block;
   width:100%;
+  flex:0 0 auto;
 }
 
 /* ===== CONTAINER ===== */
@@ -24,11 +28,13 @@ body > *{
   max-width:1100px;
   margin:0 auto;
   padding:0 20px;
+  width:100%;
 }
 
 /* ===== SECTIONS ===== */
 section{
   padding:80px 0;
+  width:100%;
 }
 
 /* ===== NAVBAR ===== */
@@ -49,14 +55,6 @@ section{
   align-items:center;
   padding:14px 20px;
 }
-
-.navbar-logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.logo-icon{width:28px}
 
 .nav-menu{
   display:flex;
@@ -95,22 +93,13 @@ section{
   pointer-events:none;
 }
 
-.hero-content{
-  position:relative;
-  z-index:1;
-}
+.hero-content{position:relative;z-index:1}
 
 .hero-logo{width:100px;margin-bottom:20px}
 
-.hero-title{
-  font-size:2.4rem;
-  letter-spacing:2px;
-}
+.hero-title{font-size:2.4rem;letter-spacing:2px}
 
-.hero-tagline{
-  color:#888;
-  margin:10px 0 25px;
-}
+.hero-tagline{color:#888;margin:10px 0 25px}
 
 .hero-buttons{
   display:flex;
@@ -136,28 +125,6 @@ section{
 }
 .btn-primary{border-color:#fff}
 .btn:hover{background:#111}
-
-/* ===== SOCIAL ===== */
-.hero-social{
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  margin-top:25px;
-}
-
-.social-icon{
-  width:44px;
-  height:44px;
-  border:1px solid #333;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:.3s;
-}
-.social-icon:hover{
-  border-color:#777;
-  transform:translateY(-3px);
-}
 
 /* ===== TITLES ===== */
 .section-title{
@@ -233,7 +200,7 @@ section{
   margin-bottom:5px;
 }
 
-/* ===== SERIES GRID (SAFE HORIZONTAL) ===== */
+/* ===== SERIES GRID (HORIZONTAL ONLY HERE) ===== */
 .series-grid{
   display:flex;
   gap:20px;
@@ -248,9 +215,8 @@ section{
   background:#333;
 }
 
-/* ===== SERIES CARD ===== */
 .series-card{
-  flex:0 0 320px;   /* fixed card width WITHOUT breaking layout */
+  flex:0 0 320px;
   border:1px solid #333;
   text-decoration:none;
   color:#fff;
@@ -266,9 +232,7 @@ section{
   display:block;
 }
 
-.series-info{
-  padding:14px;
-}
+.series-info{padding:14px}
 
 .series-count{
   color:#888;
@@ -307,11 +271,6 @@ section{
   color:#fff;
 }
 
-.form-message{
-  padding:10px;
-  border:1px solid #333;
-}
-
 /* ===== FOOTER ===== */
 .footer{
   text-align:center;
@@ -323,18 +282,9 @@ section{
 
 /* ===== MOBILE ===== */
 @media(max-width:768px){
-
   .hero{min-height:70vh}
-
   .hero-title{font-size:2rem}
-
   .stats-grid{grid-template-columns:1fr}
-
-  .hero-buttons{
-    flex-direction:column;
-  }
-
-  .hero-buttons .btn{
-    width:100%;
-  }
+  .hero-buttons{flex-direction:column}
+  .hero-buttons .btn{width:100%}
 }
