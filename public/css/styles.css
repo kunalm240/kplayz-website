@@ -245,3 +245,33 @@ section{
   section{padding:60px 0}
   .hero{min-height:70vh}
 }
+
+/* SOCIAL ICONS */
+.hero-social{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin-top:25px;
+}
+
+.social-icon{
+  width:44px;
+  height:44px;
+  border:1px solid #333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  transition:0.3s;
+}
+
+.social-icon svg{
+  width:18px;
+  height:18px;
+  fill:currentColor;
+}
+
+.social-icon:hover{
+  border-color:#777;
+  transform:translateY(-3px);
+}
