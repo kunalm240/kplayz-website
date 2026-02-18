@@ -189,22 +189,31 @@ app.get('/api/youtube/playlist/:id', async (req, res) => {
 // GET ALL PLAYLISTS
 app.get('/api/youtube/playlists', async (req, res) => {
   try {
-    const response = await youtube.playlists.list({
-      part: 'snippet,contentDetails',
-      channelId: CHANNEL_ID,
-      maxResults: 10
+    const cached = cache.get('playlists');
+    if (cached) return res.json(cached);
+
+    const response = await axios.get('https://www.googleapis.com/youtube/v3/playlists', {
+      params: {
+        part: 'snippet,contentDetails',
+        channelId: CHANNEL_ID,
+        maxResults: 10,
+        key: YOUTUBE_API_KEY
+      }
     });
 
     const playlists = response.data.items.map(pl => ({
       id: pl.id,
       title: pl.snippet.title,
-      thumbnail: pl.snippet.thumbnails.medium.url,
-      count: pl.contentDetails.itemCount
+      thumbnail: pl.snippet.thumbnails.high.url,
+      count: pl.contentDetails.itemCount,
+      description: pl.snippet.description
     }));
 
+    cache.set('playlists', playlists);
     res.json(playlists);
+
   } catch (err) {
-    console.error(err);
+    console.error('Playlist fetch error:', err.message);
     res.status(500).json({ error: 'Failed to fetch playlists' });
   }
 });
