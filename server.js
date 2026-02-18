@@ -75,34 +75,40 @@ async function getChannelStats() {
 }
 
 // ================= LATEST VIDEO =================
+// ================= LATEST VIDEO =================
 async function getLatestVideo() {
   try {
     const cached = cache.get('latestVideo');
     if (cached) return cached;
 
-    const res = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+    // 1️⃣ Get uploads playlist ID
+    const uploadsRes = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
       params: {
-        part: 'snippet',
-        channelId: CHANNEL_ID,
-        order: 'date',
-        type: 'video',
-        key: YOUTUBE_API_KEY,
-        maxResults: 1
+        part: 'contentDetails',
+        id: CHANNEL_ID,
+        key: YOUTUBE_API_KEY
       }
     });
 
-    if (!res.data.items.length) {
-      return { videoId: '' };
-    }
+    const uploadsPlaylistId =
+      uploadsRes.data.items[0].contentDetails.relatedPlaylists.uploads;
 
-    const video = res.data.items[0];
+    // 2️⃣ Get latest video from uploads playlist
+    const videoRes = await axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
+      params: {
+        part: 'snippet',
+        playlistId: uploadsPlaylistId,
+        maxResults: 1,
+        key: YOUTUBE_API_KEY
+      }
+    });
+
+    const video = videoRes.data.items[0].snippet;
 
     const result = {
-      videoId: video.id.videoId,
-      title: video.snippet.title,
-      thumbnail: video.snippet.thumbnails.high.url,
-      publishedAt: video.snippet.publishedAt,
-      description: video.snippet.description
+      id: video.resourceId.videoId,
+      title: video.title,
+      publishedAt: new Date(video.publishedAt).toDateString()
     };
 
     cache.set('latestVideo', result);
@@ -110,7 +116,7 @@ async function getLatestVideo() {
 
   } catch (error) {
     console.error('Latest Video Error:', error.message);
-    return { videoId: '' };
+    return { id: '' };
   }
 }
 
