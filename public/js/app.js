@@ -127,7 +127,14 @@ document.getElementById("contactForm").addEventListener("submit", async e => {
 function watchLatest() {
   window.open("https://youtube.com/@kplayz_official/videos", "_blank");
 }
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
 
+  const bar = document.getElementById("scrollBar");
+  if (bar) bar.style.height = progress + "%";
+});
 /* ---------- INIT ---------- */
 window.addEventListener("load", () => {
   loadStats();
