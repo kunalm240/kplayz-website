@@ -118,3 +118,23 @@ window.addEventListener("load", () => {
   loadLatestVideo();
   loadSeries();
 });
+
+/* SCROLL REVEAL */
+const reveals = document.querySelectorAll("section");
+
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.85;
+
+  reveals.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+
+    if (top < trigger) {
+      sec.classList.add("reveal", "active");
+    } else {
+      sec.classList.remove("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
