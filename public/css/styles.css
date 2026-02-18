@@ -309,3 +309,37 @@ section{
   .hero-buttons{flex-direction:column}
   .hero-buttons .btn{width:100%}
 }
+
+
+
+
+/* ===== GLOBAL FLOATING PS SYMBOLS BACKGROUND ===== */
+body::before{
+  content:"△ ○ ✕ □   △ ○ ✕ □   △ ○ ✕ □   △ ○ ✕ □   △ ○ ✕ □";
+  position:fixed;
+  top:0;
+  left:0;
+  width:200%;
+  height:200%;
+  font-size:18px;              /* tiny icons */
+  letter-spacing:40px;
+  line-height:60px;
+  color:#ffffff06;             /* ultra subtle */
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+
+  animation:psFloat 60s linear infinite;
+}
+
+/* slow diagonal floating motion */
+@keyframes psFloat{
+  0%   { transform:translate(0,0); }
+  100% { transform:translate(-25%,-25%); }
+}
+
+/* keep actual content above background */
+body > *{
+  position:relative;
+  z-index:1;
+}
