@@ -92,7 +92,16 @@ section{
 .btn:hover{background:#111}
 
 /* HERO BUTTONS — STABLE HOVER (NO FLICKER) */
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:18px;           /* more premium spacing */
+  margin-top:18px;    /* space from social icons */
+}
+
+/* HERO BUTTONS — STABLE PREMIUM */
 .hero-buttons .btn{
+  position:relative;  /* required for stability */
   min-width:170px;
   padding:12px 22px;
   text-align:center;
@@ -115,7 +124,7 @@ section{
 .hero-buttons .btn:hover{
   border-color:#777;
   background:#111;
-  transform:translate3d(0,-2px,0);   /* GPU fix */
+  transform:translate3d(0,-2px,0);
   box-shadow:0 6px 18px rgba(255,255,255,0.06);
 }
 
@@ -293,18 +302,22 @@ section{
   align-items:center;
   justify-content:center;
   color:#fff;
-  transition:0.3s;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.social-icon:hover{
+  border-color:#777;
+  transform:translateY(-3px);
+  box-shadow:0 0 12px rgba(255,255,255,0.12);
 }
 
 .social-icon svg{
   width:18px;
   height:18px;
   fill:currentColor;
-}
-
-.social-icon:hover{
-  border-color:#777;
-  transform:translateY(-3px);
 }
 
 .social-icon svg{
