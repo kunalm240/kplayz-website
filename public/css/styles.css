@@ -95,7 +95,28 @@ section{
 
 .hero-content{position:relative;z-index:1}
 
-.hero-logo{width:100px;margin-bottom:20px}
+.hero-logo{
+  width:90px;        /* fixed clean size */
+  max-width:90px;    /* prevents stretching */
+  height:auto;
+  margin-bottom:18px;
+}
+
+.hero-content img{
+  max-width:100%;
+  height:auto;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  background:radial-gradient(circle, #ffffff10, transparent 65%);
+  filter:blur(40px);
+  z-index:0;
+  pointer-events:none;
+}
 
 .hero-title{font-size:2.4rem;letter-spacing:2px}
 
