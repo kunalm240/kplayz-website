@@ -960,16 +960,30 @@ body::before{
 
 /* ===== PS RAIN BACKGROUND ===== */
 
-.ps-rain span{
-  position:absolute;
-  top:-40px;
-  font-size:14px;
-  color:rgba(255,255,255,0.12);
-  animation:rainFall linear infinite;
+/* ===== PS RAIN ===== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  min-height:100vh;   /* IMPORTANT so rain has space to fall */
 }
 
-/* random horizontal positions */
-.ps-rain span:nth-child(1){ left:5%; animation-duration:12s; animation-delay:0s;}
+.ps-rain{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+.ps-rain span{
+  position:absolute;
+  top:-50px;
+  font-size:14px;
+  color:rgba(255,255,255,0.15);
+  animation:psRain 12s linear infinite;
+}
+
+/* horizontal positions + different speeds */
+.ps-rain span:nth-child(1){ left:5%;  animation-duration:12s; animation-delay:0s;}
 .ps-rain span:nth-child(2){ left:15%; animation-duration:10s; animation-delay:2s;}
 .ps-rain span:nth-child(3){ left:25%; animation-duration:14s; animation-delay:4s;}
 .ps-rain span:nth-child(4){ left:35%; animation-duration:11s; animation-delay:1s;}
@@ -982,18 +996,24 @@ body::before{
 .ps-rain span:nth-child(11){ left:50%; animation-duration:15s; animation-delay:0s;}
 .ps-rain span:nth-child(12){ left:30%; animation-duration:12s; animation-delay:6s;}
 
-@keyframes rainFall{
-  to{
+@keyframes psRain{
+  0%{
+    transform:translateY(0);
+    opacity:0;
+  }
+  10%{
+    opacity:1;
+  }
+  100%{
     transform:translateY(110vh);
     opacity:0;
   }
 }
 
-.ps-rain{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
+/* keep content above rain */
+.hero-content{
+  position:relative;
+  z-index:1;
 }
 
 .hero-content{
