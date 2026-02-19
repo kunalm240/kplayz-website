@@ -950,3 +950,25 @@ body::before{
   50%{transform:translateY(-40px)}
   100%{transform:translateY(0)}
 }
+
+/* ===== GLOBAL PS SYMBOL BACKGROUND ===== */
+body::after{
+  content:"△ ○ ✕ □";
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:320px;
+  letter-spacing:140px;
+  color:rgba(255,255,255,0.035); /* visible but premium faint */
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+}
+
+/* Ensure all real content stays above */
+body > *{
+  position:relative;
+  z-index:1;
+}
