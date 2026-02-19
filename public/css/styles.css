@@ -172,12 +172,13 @@ section::before{
 
 /* HERO */
 .hero{
-  min-height:80vh;
+  position:relative;
+  min-height:100vh;   /* 👈 full screen hero */
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding-top:100px;
+  overflow:hidden;    /* keeps glow clean */
 }
 
 .hero::before{
