@@ -952,40 +952,45 @@ body::before{
 }
 
 /* ===== GLOBAL PS SYMBOL BACKGROUND ===== */
-/* ===== PS SYMBOL RAIN BACKGROUND ===== */
+/* ===== PS RAIN BACKGROUND (VISIBLE TEST VERSION) ===== */
 .ps-rain{
   position:fixed;
   inset:0;
   pointer-events:none;
-  overflow:hidden;
   z-index:0;
+  overflow:hidden;
 }
 
 .ps-rain span{
   position:absolute;
-  top:-10%;
-  color:rgba(255,255,255,0.045);
-  font-size:18px;
+  top:-10vh;
+  font-size:22px;
+  color:rgba(255,255,255,0.18); /* TEMPORARILY BRIGHT FOR TEST */
   animation:ps-fall linear infinite;
 }
 
-/* different speeds & positions */
-.ps-rain span:nth-child(1){ left:5%;  animation-duration:18s; animation-delay:-2s;}
-.ps-rain span:nth-child(2){ left:15%; animation-duration:22s; animation-delay:-6s;}
-.ps-rain span:nth-child(3){ left:25%; animation-duration:20s; animation-delay:-4s;}
-.ps-rain span:nth-child(4){ left:35%; animation-duration:24s; animation-delay:-8s;}
-.ps-rain span:nth-child(5){ left:45%; animation-duration:19s; animation-delay:-3s;}
-.ps-rain span:nth-child(6){ left:55%; animation-duration:23s; animation-delay:-7s;}
-.ps-rain span:nth-child(7){ left:65%; animation-duration:21s; animation-delay:-5s;}
-.ps-rain span:nth-child(8){ left:75%; animation-duration:26s; animation-delay:-9s;}
-.ps-rain span:nth-child(9){ left:85%; animation-duration:20s; animation-delay:-1s;}
-.ps-rain span:nth-child(10){left:95%; animation-duration:24s; animation-delay:-4s;}
+/* different positions */
+.ps-rain span:nth-child(1){ left:5%; animation-duration:12s; animation-delay:0s;}
+.ps-rain span:nth-child(2){ left:15%; animation-duration:14s; animation-delay:2s;}
+.ps-rain span:nth-child(3){ left:25%; animation-duration:11s; animation-delay:1s;}
+.ps-rain span:nth-child(4){ left:35%; animation-duration:13s; animation-delay:3s;}
+.ps-rain span:nth-child(5){ left:45%; animation-duration:10s; animation-delay:0s;}
+.ps-rain span:nth-child(6){ left:55%; animation-duration:15s; animation-delay:4s;}
+.ps-rain span:nth-child(7){ left:65%; animation-duration:12s; animation-delay:2s;}
+.ps-rain span:nth-child(8){ left:75%; animation-duration:14s; animation-delay:1s;}
+.ps-rain span:nth-child(9){ left:85%; animation-duration:11s; animation-delay:3s;}
+.ps-rain span:nth-child(10){ left:95%; animation-duration:13s; animation-delay:0s;}
 
 @keyframes ps-fall{
-  0%   { transform:translateY(-120vh); opacity:0; }
-  10%  { opacity:0.06; }
-  90%  { opacity:0.06; }
-  100% { transform:translateY(120vh); opacity:0; }
+  0%{ transform:translateY(-10vh); opacity:0;}
+  10%{ opacity:1;}
+  100%{ transform:translateY(110vh); opacity:0;}
+}
+
+/* keep real content above */
+body > *{
+  position:relative;
+  z-index:1;
 }
 
 /* keep content above */
