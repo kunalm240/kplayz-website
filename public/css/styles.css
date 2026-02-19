@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{
@@ -1074,4 +1074,10 @@ body::before{
     rgba(0,0,0,0) 70%);
   pointer-events:none;
   z-index:0;
+}
+.content-box{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:0 !important;
 }
