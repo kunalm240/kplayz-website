@@ -134,6 +134,15 @@ window.addEventListener("scroll", () => {
     sec.style.setProperty("--bgShift", `${offset}px`);
   });
 });
+
+document.addEventListener("mousemove", e=>{
+  document.querySelectorAll(".bg-word").forEach(el=>{
+    const x = (window.innerWidth/2 - e.clientX) * 0.005;
+    const y = (window.innerHeight/2 - e.clientY) * 0.005;
+    el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+  });
+});
+
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
