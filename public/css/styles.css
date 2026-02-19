@@ -402,10 +402,14 @@ section{
 /* ===== SERIES RAIL (MULTI SERIES READY) ===== */
 .series-grid{
   display:grid;
-  overflow-x:auto;
   grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
   gap:30px;
-  scroll-snap-type:x mandatory;
+  justify-items:center;   /* centers cards inside each column */
+}
+
+.series-grid:has(.series-card:only-child){
+  grid-template-columns:1fr;
+  justify-items:center;
 }
 
 .series-grid::-webkit-scrollbar{
