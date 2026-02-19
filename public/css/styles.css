@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600&display=swap');
 
 *{margin:0;padding:0;box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+}
 
 body{
   font-family:system-ui;
@@ -223,6 +226,10 @@ section{
 }
 
 /* TITLES */
+section{
+  scroll-margin-top:90px;
+}
+
 .section-title{
   text-align:center;
   margin-bottom:40px;
