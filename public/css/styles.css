@@ -985,9 +985,3 @@ body::before{
   from{transform:translateY(-10vh);}
   to{transform:translateY(110vh);}
 }
-
-/* keep content above */
-body > *{
-  position:relative;
-  z-index:1;
-}
