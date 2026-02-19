@@ -660,3 +660,20 @@ body > *:not(.ps-bg-layer){
 .info-section + .info-section{
   border-top:1px solid #111;
 }
+
+/* SECTION SURFACE VARIATION */
+section{
+  position:relative;
+  z-index:1;
+}
+
+section:nth-of-type(even){
+  background:#050505;   /* subtle contrast */
+}
+
+.section-divider{
+  width:80px;
+  height:1px;
+  background:#222;
+  margin:60px auto 0;
+}
