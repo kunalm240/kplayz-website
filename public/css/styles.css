@@ -960,44 +960,33 @@ body::before{
 
 /* ===== PS RAIN BACKGROUND ===== */
 
-.ps-test-symbol{
-  position:absolute;
-  top:40px;
-  left:40px;
-  font-size:80px;
-  color:white;
-  z-index:2;
-}
-
-.ps-rain{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-
 .ps-rain span{
   position:absolute;
-  top:-10vh;
-  font-size:22px;
-  color:white;        /* test visibility */
-  animation:fall 10s linear infinite;
+  top:-40px;
+  font-size:14px;
+  color:rgba(255,255,255,0.12);
+  animation:rainFall linear infinite;
 }
 
-.ps-rain span:nth-child(1){left:5%;}
-.ps-rain span:nth-child(2){left:15%;}
-.ps-rain span:nth-child(3){left:25%;}
-.ps-rain span:nth-child(4){left:35%;}
-.ps-rain span:nth-child(5){left:45%;}
-.ps-rain span:nth-child(6){left:55%;}
-.ps-rain span:nth-child(7){left:65%;}
-.ps-rain span:nth-child(8){left:75%;}
-.ps-rain span:nth-child(9){left:85%;}
-.ps-rain span:nth-child(10){left:95%;}
+/* random horizontal positions */
+.ps-rain span:nth-child(1){ left:5%; animation-duration:12s; animation-delay:0s;}
+.ps-rain span:nth-child(2){ left:15%; animation-duration:10s; animation-delay:2s;}
+.ps-rain span:nth-child(3){ left:25%; animation-duration:14s; animation-delay:4s;}
+.ps-rain span:nth-child(4){ left:35%; animation-duration:11s; animation-delay:1s;}
+.ps-rain span:nth-child(5){ left:45%; animation-duration:13s; animation-delay:3s;}
+.ps-rain span:nth-child(6){ left:55%; animation-duration:9s;  animation-delay:5s;}
+.ps-rain span:nth-child(7){ left:65%; animation-duration:12s; animation-delay:2s;}
+.ps-rain span:nth-child(8){ left:75%; animation-duration:10s; animation-delay:4s;}
+.ps-rain span:nth-child(9){ left:85%; animation-duration:13s; animation-delay:1s;}
+.ps-rain span:nth-child(10){ left:95%; animation-duration:11s; animation-delay:3s;}
+.ps-rain span:nth-child(11){ left:50%; animation-duration:15s; animation-delay:0s;}
+.ps-rain span:nth-child(12){ left:30%; animation-duration:12s; animation-delay:6s;}
 
-@keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);}
+@keyframes rainFall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 
 .ps-rain{
