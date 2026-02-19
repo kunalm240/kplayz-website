@@ -197,6 +197,10 @@ section::before{
   margin:10px 0 25px;
 }
 
+.hero{
+  position:relative;
+}
+
 /* BUTTONS */
 .btn{
   padding:10px 18px;
