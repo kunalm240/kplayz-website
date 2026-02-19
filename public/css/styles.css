@@ -955,21 +955,20 @@ body::before{
 
 /* ===== PS RAIN BACKGROUND ===== */
 .ps-rain{
-  position:fixed;
+  position:absolute;
   inset:0;
-  z-index:0;
   pointer-events:none;
+  overflow:hidden;
 }
 
 .ps-rain span{
   position:absolute;
   top:-10vh;
-  font-size:24px;
-  color:white;              /* FULL WHITE for visibility test */
+  font-size:22px;
+  color:white;        /* test visibility */
   animation:fall 10s linear infinite;
 }
 
-/* horizontal positions */
 .ps-rain span:nth-child(1){left:5%;}
 .ps-rain span:nth-child(2){left:15%;}
 .ps-rain span:nth-child(3){left:25%;}
