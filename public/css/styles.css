@@ -1075,16 +1075,12 @@ body::before{
   pointer-events:none;
   z-index:0;
 }
-.content-box{
-  background:transparent !important;
-  border:none !important;
-  box-shadow:none !important;
-  padding:0 !important;
-}
 
 /* 🔥 FORCE REMOVE BLACK BOX FROM ALL SECTIONS */
 .content-box{
-  background:transparent !important;
+ background:rgba(255,255,255,0.02);
+backdrop-filter:blur(6px);
+border:1px solid rgba(255,255,255,0.06);
   border:none !important;
   box-shadow:none !important;
   padding:0 !important;
