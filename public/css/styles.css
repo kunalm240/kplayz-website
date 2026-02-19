@@ -199,7 +199,7 @@ section::before{
 
 .hero{
   position:relative;
-  overflow:visible;
+  overflow:hidden;
 }
 
 /* BUTTONS */
