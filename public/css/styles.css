@@ -1138,35 +1138,68 @@ section > *:not(.section-ghost){
 }
 
 /* MOBILE SIDE PADDING FIX */
+/* 📱 MOBILE LAYOUT FIX */
 @media (max-width: 768px){
+
+  /* give equal side spacing everywhere */
   .container{
     padding-left:16px;
     padding-right:16px;
   }
 
-  section{
-    padding-left:0;
-    padding-right:0;
+  /* reduce hero height */
+  .hero{
+    min-height:60vh;
+    padding-top:80px;
   }
-}
 
-@media (max-width: 768px){
+  /* center hero content properly */
+  .hero-content{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  /* make buttons full width and stacked */
+  .hero-buttons{
+    flex-direction:column;
+    gap:12px;
+    width:100%;
+  }
+
+  .hero-buttons .btn{
+    width:100%;
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  /* stats 2 per row */
   .stats-grid{
-    gap:16px;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
   }
 
   .stat-card{
-    margin:0 4px;
+    padding:20px;
   }
-}
 
-@media (max-width: 768px){
+  /* series cards spacing */
+  .series-grid{
+    gap:16px;
+  }
+
+  /* video full width and centered */
   .featured-video{
     max-width:100%;
   }
-}
 
-@media (max-width: 768px){
+  /* text sections better spacing */
+  .about-content,
+  .section-content{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  /* navbar padding fix */
   .navbar-container{
     padding-left:12px;
     padding-right:12px;
