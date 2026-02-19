@@ -11,13 +11,14 @@ body{
   color:#fff;
   line-height:1.6;
 }
+
 body::after{
   content:"";
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 50% 20%, #ffffff08, transparent 60%),
-    radial-gradient(circle at 50% 80%, #ffffff05, transparent 60%);
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 40%);
   pointer-events:none;
   z-index:0;
 }
