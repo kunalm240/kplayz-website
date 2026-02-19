@@ -112,16 +112,7 @@ section{
   position:relative;
 }
 
-section::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:50%;
-  width:60%;
-  height:1px;
-  background:linear-gradient(90deg, transparent, #ffffff22, transparent);
-  transform:translateX(-50%);
-}
+
 
 /* NAVBAR */
 .navbar{
@@ -181,21 +172,6 @@ section::before{
   overflow:hidden;    /* keeps glow clean */
 }
 
-.hero::before{
-  content:'';
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:500px;
-  height:500px;
-  transform:translate(-50%, -50%);
-  background:radial-gradient(circle,
-    rgba(255,255,255,0.08) 0%,
-    rgba(255,255,255,0.04) 35%,
-    rgba(0,0,0,0) 70%);
-  pointer-events:none;
-  z-index:0;
-}
 
 .hero::after{
   content:"";
@@ -1083,4 +1059,20 @@ body > *:not(.ps-rain){
 .hero-content{
   position:relative;
   z-index:1;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  top:50%;
+  left:50%;
+  width:650px;
+  height:650px;
+  transform:translate(-50%, -50%);
+  background:radial-gradient(circle,
+    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.05) 35%,
+    rgba(0,0,0,0) 70%);
+  pointer-events:none;
+  z-index:0;
 }
