@@ -188,6 +188,20 @@ document.addEventListener("mousemove", e=>{
   });
 });
 
+document.addEventListener('mousemove', (e) => {
+
+  const x = (e.clientX / window.innerWidth - 0.5) * 20;
+  const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+  document.querySelectorAll('.ps-symbol').forEach((el, i) => {
+
+    const depth = el.style.fontSize === '16px' ? 0.6 : 0.3; // near vs far
+    el.style.transform += ` translate(${x * depth}px, ${y * depth}px)`;
+
+  });
+
+});
+
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
