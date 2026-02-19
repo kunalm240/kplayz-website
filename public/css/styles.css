@@ -952,22 +952,43 @@ body::before{
 }
 
 /* ===== GLOBAL PS SYMBOL BACKGROUND ===== */
-body::after{
-  content:"△ ○ ✕ □";
+/* ===== PS SYMBOL RAIN BACKGROUND ===== */
+.ps-rain{
   position:fixed;
   inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:320px;
-  letter-spacing:140px;
-  color:rgba(255,255,255,0.035); /* visible but premium faint */
   pointer-events:none;
-  user-select:none;
+  overflow:hidden;
   z-index:0;
 }
 
-/* Ensure all real content stays above */
+.ps-rain span{
+  position:absolute;
+  top:-10%;
+  color:rgba(255,255,255,0.045);
+  font-size:18px;
+  animation:ps-fall linear infinite;
+}
+
+/* different speeds & positions */
+.ps-rain span:nth-child(1){ left:5%;  animation-duration:18s; animation-delay:-2s;}
+.ps-rain span:nth-child(2){ left:15%; animation-duration:22s; animation-delay:-6s;}
+.ps-rain span:nth-child(3){ left:25%; animation-duration:20s; animation-delay:-4s;}
+.ps-rain span:nth-child(4){ left:35%; animation-duration:24s; animation-delay:-8s;}
+.ps-rain span:nth-child(5){ left:45%; animation-duration:19s; animation-delay:-3s;}
+.ps-rain span:nth-child(6){ left:55%; animation-duration:23s; animation-delay:-7s;}
+.ps-rain span:nth-child(7){ left:65%; animation-duration:21s; animation-delay:-5s;}
+.ps-rain span:nth-child(8){ left:75%; animation-duration:26s; animation-delay:-9s;}
+.ps-rain span:nth-child(9){ left:85%; animation-duration:20s; animation-delay:-1s;}
+.ps-rain span:nth-child(10){left:95%; animation-duration:24s; animation-delay:-4s;}
+
+@keyframes ps-fall{
+  0%   { transform:translateY(-120vh); opacity:0; }
+  10%  { opacity:0.06; }
+  90%  { opacity:0.06; }
+  100% { transform:translateY(120vh); opacity:0; }
+}
+
+/* keep content above */
 body > *{
   position:relative;
   z-index:1;
