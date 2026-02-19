@@ -135,6 +135,18 @@ window.addEventListener("scroll", () => {
   });
 });
 
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+
+  window.scrollTo({
+    top:y,
+    behavior:"smooth"
+  });
+}
+
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".bg-word").forEach(el=>{
     const x = (window.innerWidth/2 - e.clientX) * 0.005;
