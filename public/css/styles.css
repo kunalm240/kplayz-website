@@ -146,11 +146,13 @@ section::before{
 .hero::after{
   content:"";
   position:absolute;
-  bottom:0;
-  left:0;
-  right:0;
-  height:120px;
-  background:linear-gradient(to bottom, transparent, #000);
+  width:420px;
+  height:420px;
+  background:radial-gradient(circle, rgba(255,255,255,0.06), transparent 60%);
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  z-index:0;
 }
 
 .hero-logo{width:100px;margin-bottom:20px}
@@ -246,6 +248,29 @@ section{
   scroll-margin-top:90px;
 }
 
+section{
+  padding:120px 0;
+}
+
+.section-title{
+  margin-bottom:60px;
+}
+
+.section-title{
+  font-size:2rem;
+  letter-spacing:1px;
+}
+
+.production-card h3{
+  font-size:1.3rem;
+  margin-bottom:10px;
+}
+
+.production-card p{
+  color:#aaa;
+  line-height:1.7;
+}
+
 .section-title{
   text-align:center;
   margin-bottom:40px;
@@ -308,6 +333,23 @@ section{
 .video-date{
   color:#888;
   margin:10px 0 20px;
+}
+
+.stat-card,
+.series-card,
+.production-card{
+  background:rgba(255,255,255,0.02);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+}
+
+.stat-card:hover,
+.series-card:hover,
+.production-card:hover{
+  transform:translateY(-6px) scale(1.01);
+  border-color:#ffffff55;
+  box-shadow:0 20px 60px rgba(0,0,0,0.8), 0 0 25px rgba(255,255,255,0.08);
 }
 
 /* STATS */
