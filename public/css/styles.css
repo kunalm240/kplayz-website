@@ -958,6 +958,16 @@ body::before{
 /* ===== GLOBAL PS SYMBOL BACKGROUND ===== */
 
 /* ===== PS RAIN BACKGROUND ===== */
+
+.ps-test-symbol{
+  position:absolute;
+  top:40px;
+  left:40px;
+  font-size:80px;
+  color:white;
+  z-index:5;
+}
+
 .ps-rain{
   position:absolute;
   inset:0;
