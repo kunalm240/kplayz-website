@@ -554,27 +554,31 @@ body > *:not(.ps-bg-layer){
 }
 
 /* ===== PREMIUM EDITORIAL INFO LAYOUT ===== */
-
+/* ===== INFO SECTION ALIGNMENT FIX ===== */
 .info-section{
   padding:120px 0;
+  text-align:center;           /* center the whole section */
 }
 
 .info-section .container{
-  max-width:720px;       /* narrow reading column */
+  max-width:720px;
+  margin:0 auto;
 }
 
 .info-section .section-title{
+  text-align:center;           /* FIX: title centered */
   font-size:28px;
   font-weight:600;
-  margin-bottom:40px;
-  text-align:left;
+  margin-bottom:50px;
 }
 
 .info-paragraph{
   font-size:15px;
   line-height:1.9;
   color:#bbb;
-  text-align:left;
+  text-align:center;           /* FIX: paragraph centered */
+  max-width:640px;
+  margin:0 auto;
 }
 
 .info-list{
@@ -589,9 +593,15 @@ body > *:not(.ps-bg-layer){
 
 .info-card{
   border:1px solid #222;
-  padding:24px;
-  margin:16px 0;
+  padding:28px 24px;
+  margin:20px auto;
   background:#000;
+  max-width:620px;     /* keeps cards aligned with text column */
+  text-align:center;   /* FIX: content centered */
+}
+
+.info-card + .info-card{
+  margin-top:24px;
 }
 
 .info-card h3{
