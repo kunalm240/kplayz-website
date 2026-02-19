@@ -1207,44 +1207,60 @@ section > *:not(.section-ghost){
 }
 
 /* 📱 FORCE MOBILE STACKING */
+/* 📱 HARD MOBILE FIX */
 @media (max-width: 768px){
 
-  /* make every grid single column */
-  .stats-grid,
-  .series-grid,
-  .featured-grid{
-    display:grid;
-    grid-template-columns:1fr !important;
+  /* force everything to use full width safely */
+  *{
+    max-width:100%;
+    box-sizing:border-box;
   }
 
-  /* center all text sections */
-  .about-content,
-  .section-content,
-  .featured-info{
-    text-align:center;
+  /* containers */
+  .container{
+    width:100%;
+    padding-left:16px;
+    padding-right:16px;
     margin:0 auto;
   }
 
-  /* fix video width */
-  .featured-video{
-    width:100%;
-    max-width:100%;
+  /* remove any fixed widths */
+  .featured-video,
+  .featured-info,
+  .about-content,
+  .section-content{
+    max-width:100% !important;
+    width:100% !important;
   }
 
-  /* add breathing space between sections */
-  section{
-    padding:70px 0;
+  /* stack all grids */
+  .stats-grid,
+  .series-grid,
+  .featured-grid{
+    display:block !important;
   }
 
-  /* prevent cards from touching edges */
+  /* cards spacing */
   .stat-card,
   .series-card{
-    margin:0 4px;
+    width:100%;
+    margin-bottom:16px;
   }
 
-  /* fix series image scaling */
-  .series-card img{
+  /* hero buttons full width */
+  .hero-buttons{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .hero-buttons .btn{
     width:100%;
-    height:auto;
+  }
+
+  /* video iframe responsive */
+  .featured-video iframe{
+    width:100%;
+    height:100%;
   }
 }
