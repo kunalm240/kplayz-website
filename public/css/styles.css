@@ -999,3 +999,15 @@ body::before{
   from{transform:translateY(-10vh);}
   to{transform:translateY(110vh);}
 }
+
+.ps-rain{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+}
