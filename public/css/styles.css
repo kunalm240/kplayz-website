@@ -1081,3 +1081,49 @@ body::before{
   box-shadow:none !important;
   padding:0 !important;
 }
+
+/* 🔥 FORCE REMOVE BLACK BOX FROM ALL SECTIONS */
+.content-box{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+/* 🔥 FORCE CENTER ALL SECTIONS */
+section{
+  position:relative;
+  display:flex;
+  justify-content:center;
+}
+
+/* 🔥 STANDARD CONTAINER WIDTH */
+section .container{
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* 🔥 PERFECT CENTER GHOST HEADINGS */
+.section-ghost{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:clamp(90px, 10vw, 160px);
+  letter-spacing:14px;
+  color:rgba(255,255,255,0.03);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+  width:100%;
+  text-align:center;
+}
+
+/* 🔥 KEEP REAL CONTENT ABOVE GHOST */
+section > *:not(.section-ghost){
+  position:relative;
+  z-index:1;
+}
