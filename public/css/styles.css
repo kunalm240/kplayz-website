@@ -963,47 +963,52 @@ body::before{
 /* ===== PS RAIN ===== */
 .hero{
   position:relative;
-  overflow:hidden;
   min-height:100vh;   /* IMPORTANT so rain has space to fall */
 }
 
+/* ===== FULL-PAGE PS RAIN ===== */
+
 .ps-rain{
-  position:absolute;
-  inset:0;
-  z-index:0;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
   pointer-events:none;
+  z-index:0;
+  overflow:hidden;
 }
 
 .ps-rain span{
   position:absolute;
-  top:-50px;
+  top:-40px;
   font-size:14px;
   color:rgba(255,255,255,0.15);
-  animation:psRain 12s linear infinite;
+  animation:psRain linear infinite;
 }
 
-/* horizontal positions + different speeds */
-.ps-rain span:nth-child(1){ left:5%;  animation-duration:12s; animation-delay:0s;}
-.ps-rain span:nth-child(2){ left:15%; animation-duration:10s; animation-delay:2s;}
-.ps-rain span:nth-child(3){ left:25%; animation-duration:14s; animation-delay:4s;}
-.ps-rain span:nth-child(4){ left:35%; animation-duration:11s; animation-delay:1s;}
-.ps-rain span:nth-child(5){ left:45%; animation-duration:13s; animation-delay:3s;}
-.ps-rain span:nth-child(6){ left:55%; animation-duration:9s;  animation-delay:5s;}
-.ps-rain span:nth-child(7){ left:65%; animation-duration:12s; animation-delay:2s;}
-.ps-rain span:nth-child(8){ left:75%; animation-duration:10s; animation-delay:4s;}
-.ps-rain span:nth-child(9){ left:85%; animation-duration:13s; animation-delay:1s;}
-.ps-rain span:nth-child(10){ left:95%; animation-duration:11s; animation-delay:3s;}
-.ps-rain span:nth-child(11){ left:50%; animation-duration:15s; animation-delay:0s;}
-.ps-rain span:nth-child(12){ left:30%; animation-duration:12s; animation-delay:6s;}
+/* spread across width */
+.ps-rain span:nth-child(1){ left:3%;  animation-duration:12s; animation-delay:0s;}
+.ps-rain span:nth-child(2){ left:10%; animation-duration:9s;  animation-delay:2s;}
+.ps-rain span:nth-child(3){ left:17%; animation-duration:11s; animation-delay:4s;}
+.ps-rain span:nth-child(4){ left:24%; animation-duration:13s; animation-delay:1s;}
+.ps-rain span:nth-child(5){ left:31%; animation-duration:10s; animation-delay:3s;}
+.ps-rain span:nth-child(6){ left:38%; animation-duration:14s; animation-delay:5s;}
+.ps-rain span:nth-child(7){ left:45%; animation-duration:12s; animation-delay:0s;}
+.ps-rain span:nth-child(8){ left:52%; animation-duration:9s;  animation-delay:2s;}
+.ps-rain span:nth-child(9){ left:59%; animation-duration:11s; animation-delay:4s;}
+.ps-rain span:nth-child(10){ left:66%; animation-duration:13s; animation-delay:1s;}
+.ps-rain span:nth-child(11){ left:73%; animation-duration:10s; animation-delay:3s;}
+.ps-rain span:nth-child(12){ left:80%; animation-duration:14s; animation-delay:5s;}
+.ps-rain span:nth-child(13){ left:87%; animation-duration:12s; animation-delay:0s;}
+.ps-rain span:nth-child(14){ left:94%; animation-duration:10s; animation-delay:2s;}
 
 @keyframes psRain{
   0%{
     transform:translateY(0);
     opacity:0;
   }
-  10%{
-    opacity:1;
-  }
+  10%{opacity:1;}
   100%{
     transform:translateY(110vh);
     opacity:0;
@@ -1011,7 +1016,7 @@ body::before{
 }
 
 /* keep content above rain */
-.hero-content{
+body > *:not(.ps-rain){
   position:relative;
   z-index:1;
 }
