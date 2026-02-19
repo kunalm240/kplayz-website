@@ -180,6 +180,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+const indicator = document.querySelector('.nav-indicator');
+const navLinks = document.querySelectorAll('.nav-menu a');
+
+navLinks.forEach(link => {
+
+  link.addEventListener('mouseenter', (e) => {
+
+    const rect = e.target.getBoundingClientRect();
+    const navRect = document.querySelector('.navbar').getBoundingClientRect();
+
+    indicator.style.width = rect.width + 'px';
+    indicator.style.left = (rect.left - navRect.left) + 'px';
+  });
+
+});
+
+document.querySelector('.navbar').addEventListener('mouseleave', () => {
+  indicator.style.width = '0';
+});
+
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".bg-word").forEach(el=>{
     const x = (window.innerWidth/2 - e.clientX) * 0.005;
