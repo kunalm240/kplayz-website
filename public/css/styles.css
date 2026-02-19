@@ -1205,3 +1205,46 @@ section > *:not(.section-ghost){
     padding-right:12px;
   }
 }
+
+/* 📱 FORCE MOBILE STACKING */
+@media (max-width: 768px){
+
+  /* make every grid single column */
+  .stats-grid,
+  .series-grid,
+  .featured-grid{
+    display:grid;
+    grid-template-columns:1fr !important;
+  }
+
+  /* center all text sections */
+  .about-content,
+  .section-content,
+  .featured-info{
+    text-align:center;
+    margin:0 auto;
+  }
+
+  /* fix video width */
+  .featured-video{
+    width:100%;
+    max-width:100%;
+  }
+
+  /* add breathing space between sections */
+  section{
+    padding:70px 0;
+  }
+
+  /* prevent cards from touching edges */
+  .stat-card,
+  .series-card{
+    margin:0 4px;
+  }
+
+  /* fix series image scaling */
+  .series-card img{
+    width:100%;
+    height:auto;
+  }
+}
