@@ -957,56 +957,37 @@ body::before{
 .ps-rain{
   position:fixed;
   inset:0;
-  pointer-events:none;
   z-index:0;
-  overflow:hidden;
+  pointer-events:none;
 }
 
 .ps-rain span{
   position:absolute;
   top:-10vh;
-  width:16px;
-  height:16px;
-  animation:rainFall linear infinite;
-  opacity:0.08;
+  font-size:24px;
+  color:white;              /* FULL WHITE for visibility test */
+  animation:fall 10s linear infinite;
 }
 
-.ps-rain svg{
-  width:100%;
-  height:100%;
-  stroke:#fff;
-  fill:none;
-  stroke-width:1.5;
-}
+/* horizontal positions */
+.ps-rain span:nth-child(1){left:5%;}
+.ps-rain span:nth-child(2){left:15%;}
+.ps-rain span:nth-child(3){left:25%;}
+.ps-rain span:nth-child(4){left:35%;}
+.ps-rain span:nth-child(5){left:45%;}
+.ps-rain span:nth-child(6){left:55%;}
+.ps-rain span:nth-child(7){left:65%;}
+.ps-rain span:nth-child(8){left:75%;}
+.ps-rain span:nth-child(9){left:85%;}
+.ps-rain span:nth-child(10){left:95%;}
 
-/* positions + speeds */
-.ps-rain span:nth-child(1){left:5%; animation-duration:12s;}
-.ps-rain span:nth-child(2){left:15%; animation-duration:18s;}
-.ps-rain span:nth-child(3){left:25%; animation-duration:14s;}
-.ps-rain span:nth-child(4){left:35%; animation-duration:20s;}
-.ps-rain span:nth-child(5){left:45%; animation-duration:13s;}
-.ps-rain span:nth-child(6){left:55%; animation-duration:17s;}
-.ps-rain span:nth-child(7){left:65%; animation-duration:15s;}
-.ps-rain span:nth-child(8){left:75%; animation-duration:19s;}
-.ps-rain span:nth-child(9){left:85%; animation-duration:16s;}
-.ps-rain span:nth-child(10){left:95%; animation-duration:21s;}
-
-@keyframes rainFall{
-  from{ transform:translateY(-10vh); }
-  to{ transform:translateY(110vh); }
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
 }
 
 /* keep content above */
 body > *{
   position:relative;
   z-index:1;
-}
-
-.ps-test{
-  position:fixed;
-  top:20px;
-  left:20px;
-  z-index:9999;
-  color:red;
-  font-size:40px;
 }
