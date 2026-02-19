@@ -80,6 +80,21 @@ section{
   padding:80px 0;
 }
 
+section{
+  position:relative;
+}
+
+section::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  width:60%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, #ffffff22, transparent);
+  transform:translateX(-50%);
+}
+
 /* NAVBAR */
 .navbar{
   position:fixed;
