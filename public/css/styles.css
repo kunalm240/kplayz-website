@@ -966,7 +966,7 @@ body::before{
   left:40px;
   font-size:80px;
   color:white;
-  z-index:5;
+  z-index:2;
 }
 
 .ps-rain{
