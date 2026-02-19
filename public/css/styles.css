@@ -1,5 +1,21 @@
  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600&display=swap');
 
+.section-bg-text{
+ position:absolute;
+ top:50%;
+ left:50%;
+ transform:translate(-50%, -50%);
+ font-size:120px;
+ letter-spacing:20px;
+ color:#ffffff06;
+ white-space:nowrap;
+ pointer-events:none;
+ user-select:none;
+ z-index:0;
+ text-align:center;
+ width:100%;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 html{
   scroll-behavior:smooth;
