@@ -952,6 +952,12 @@ body::before{
 }
 
 /* ===== GLOBAL PS SYMBOL BACKGROUND ===== */
+
+/* keep content above */
+body > *{
+  position:relative;
+  z-index:1;
+}
 /* ===== PS RAIN BACKGROUND ===== */
 
 .ps-rain{
@@ -989,16 +995,4 @@ body::before{
   from{ transform:translateY(-10vh); opacity:0; }
   10%{ opacity:1; }
   to{ transform:translateY(110vh); opacity:0; }
-}
-
-/* keep real content above */
-body > *{
-  position:relative;
-  z-index:1;
-}
-
-/* keep content above */
-body > *{
-  position:relative;
-  z-index:1;
 }
