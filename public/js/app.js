@@ -147,6 +147,29 @@ function scrollToSection(id){
   });
 }
 
+const symbols = ['△','○','✕','□'];
+const container = document.querySelector('.ps-rain');
+
+for(let i = 0; i < 60; i++){
+
+  const span = document.createElement('span');
+  span.classList.add('ps-symbol');
+
+  span.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+
+  span.style.left = Math.random() * 100 + 'vw';
+
+  const size = 10 + Math.random() * 18;
+  span.style.fontSize = size + 'px';
+
+  span.style.opacity = 0.05 + Math.random() * 0.12;
+
+  span.style.animationDuration = 8 + Math.random() * 10 + 's';
+  span.style.animationDelay = Math.random() * 10 + 's';
+
+  container.appendChild(span);
+}
+
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".bg-word").forEach(el=>{
     const x = (window.innerWidth/2 - e.clientX) * 0.005;
