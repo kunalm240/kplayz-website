@@ -909,3 +909,13 @@ section:nth-of-type(even){
   background:#222;
   margin:60px auto 0;
 }
+
+body::before{
+  animation:floatBG 40s linear infinite;
+}
+
+@keyframes floatBG{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-40px)}
+  100%{transform:translateY(0)}
+}
