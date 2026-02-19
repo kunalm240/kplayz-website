@@ -147,28 +147,38 @@ function scrollToSection(id){
   });
 }
 
-const symbols = ['△','○','✕','□'];
-const container = document.querySelector('.ps-rain');
+document.addEventListener('DOMContentLoaded', () => {
 
-for(let i = 0; i < 60; i++){
+  const symbols = ['△','○','✕','□'];
+  const container = document.querySelector('.ps-rain');
 
-  const span = document.createElement('span');
-  span.classList.add('ps-symbol');
+  for(let i = 0; i < 70; i++){
 
-  span.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    const span = document.createElement('span');
+    span.classList.add('ps-symbol');
 
-  span.style.left = Math.random() * 100 + 'vw';
+    span.innerText = symbols[Math.floor(Math.random()*symbols.length)];
+    span.style.left = Math.random() * 100 + 'vw';
 
-  const size = 10 + Math.random() * 18;
-  span.style.fontSize = size + 'px';
+    // FAR LAYER (small, slow, faint)
+    if(Math.random() > 0.25){
+      span.style.fontSize = '10px';
+      span.style.opacity = 0.05;
+      span.style.animationDuration = (14 + Math.random() * 6) + 's';
+    }
+    // NEAR LAYER (slightly bigger, faster)
+    else{
+      span.style.fontSize = '16px';
+      span.style.opacity = 0.12;
+      span.style.animationDuration = (8 + Math.random() * 4) + 's';
+    }
 
-  span.style.opacity = 0.05 + Math.random() * 0.12;
+    span.style.animationDelay = Math.random() * 10 + 's';
 
-  span.style.animationDuration = 8 + Math.random() * 10 + 's';
-  span.style.animationDelay = Math.random() * 10 + 's';
+    container.appendChild(span);
+  }
 
-  container.appendChild(span);
-}
+});
 
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".bg-word").forEach(el=>{
