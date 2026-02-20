@@ -97,11 +97,12 @@ document.getElementById("contactForm").addEventListener("submit", async e => {
     const res = await fetch(`${API}/api/contact`, {
       method: "POST",
       headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        message: message.value
-      })
+     body: JSON.stringify({
+ name: name.value,
+ email: email.value,
+ subject: subject.value,
+ message: message.value
+})
     });
 
     const data = await res.json();
