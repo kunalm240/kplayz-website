@@ -92,6 +92,9 @@ document.getElementById("contactForm").addEventListener("submit", async e => {
   e.preventDefault();
 
   const msg = document.getElementById("formMessage");
+  msg.style.display = "none";
+msg.textContent = "";
+msg.className = "form-message";
 
   try {
     const res = await fetch(`${API}/api/contact`, {
