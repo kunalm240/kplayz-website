@@ -1264,3 +1264,11 @@ section > *:not(.section-ghost){
     height:100%;
   }
 }
+
+
+@media (max-width: 768px){
+  .contact-form{
+    width:100%;
+    max-width:100%;
+  }
+}
