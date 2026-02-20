@@ -213,10 +213,20 @@ app.get('/api/youtube/uploads', async (req, res) => {
 
 /* ================= CONTACT ================= */
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
+
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log("SMTP ERROR:", error);
+  } else {
+    console.log("SMTP READY");
   }
 });
 
