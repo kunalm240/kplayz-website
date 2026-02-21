@@ -1,3 +1,6 @@
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -212,25 +215,7 @@ app.get('/api/youtube/uploads', async (req, res) => {
 });
 
 /* ================= CONTACT ================= */
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,   // IMPORTANT: false for 587
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASSWORD,
-  },
-});
-
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log("SMTP ERROR:", error);
-  } else {
-    console.log("SMTP READY");
-  }
-});
-
-app.post('/api/contact', rateLimit, async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, subject, message } = req.body;
 
@@ -238,26 +223,26 @@ app.post('/api/contact', rateLimit, async (req, res) => {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER,
-      replyTo: email,
-      subject: `[KPLAYZ] ${subject}`,
+    await resend.emails.send({
+      from: 'KPLAYZ Contact <onboarding@resend.dev>',
+      to: 'kplayz.official@gmail.com',   // your email here
+      subject: subject,
       html: `
         <h3>New Contact Message</h3>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b><br>${message}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong><br/>${message}</p>
       `
     });
 
-    res.json({ success: true });
-  } catch (err) {
-    console.error('Contact form error:', err);
+    res.json({ success: true, message: 'Message sent successfully!' });
+
+  } catch (error) {
+    console.error('Resend error:', error);
     res.status(500).json({ error: 'Failed to send message' });
   }
 });
-
 /* ================= START SERVER ================= */
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
